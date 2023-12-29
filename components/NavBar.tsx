@@ -14,13 +14,16 @@ function NavBar() {
                     <Link href="/" className='link cursor-pointer hover:opacity-40' >Home</Link>
                 </li>
                 <li>
-                    <Link href="#" className='link cursor-pointer hover:opacity-40' >About Us</Link>
+                    <Link href="/pages/fareestimate" className='link cursor-pointer hover:opacity-40' >Estimate Fare</Link>
                 </li>
                 <li>
-                    <Link href="#" className='link cursor-pointer hover:opacity-40' >Services</Link>
+                    <Link href="/pages/about" className='link cursor-pointer hover:opacity-40' >About Us</Link>
                 </li>
                 <li>
-                    <Link href="#" className='link cursor-pointer hover:opacity-40' >Contact Us</Link>
+                    <Link href="/pages/services" className='link cursor-pointer hover:opacity-40' >Services</Link>
+                </li>
+                <li>
+                    <Link href="/pages/contact" className='link cursor-pointer hover:opacity-40' >Contact Us</Link>
                 </li>
             </ul>
         </div>
