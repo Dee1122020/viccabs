@@ -15,12 +15,12 @@ function Footer() {
             <section className='mb-2'>
               <p>
               Email: 
-              <a href="mailto:inquiries@viccabs.com.au"
-                >inquiries@viccabs.com.au</a>
+              <Link href="mailto:inquiries@viccabs.com.au"
+                >inquiries@viccabs.com.au</Link>
               </p>
             </section>
             <section>
-              <p>Phone: <a href="tel:+61459391456">0459 391 456</a><br />&emsp;&emsp;&ensp;&ensp;<a href="tel:+61403165754">0403 165 754</a>
+              <p>Phone: <Link href="tel:+61459391456">0459 391 456</Link><br />&emsp;&emsp;&ensp;&ensp;<a href="tel:+61403165754">0403 165 754</a>
               </p>
             </section>
             
