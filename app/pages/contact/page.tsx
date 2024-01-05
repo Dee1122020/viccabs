@@ -1,28 +1,28 @@
+import Link from 'next/link'
 import React from 'react'
 
 function Contact() {
   return (
-    <div className="text-gray-400 capitalize bg-black">
-      <div className='flex flex-row-reverse gap-2 p-5'>
+    <div className="text-gray-400 bg-black p-5">
+      <div>
+        <h2 className="text-4xl font-bold text-center sm:text-5xl mb-6 py-6">
+          Contact Us
+        </h2>
+      </div>
+      <div className='flex flex-col gap-2 p-5 items-center'>
         <div className="w-1/2">
           <img src="/callcenter.jpg" alt="Call Center" />
         </div>
-        <div className='w-1/2 mt-16'>
-          <h2 className="text-4xl font-bold text-center sm:text-5xl mb-6">
-            Contact Us
-          </h2>
-          <h3 className="text-2xl text-center sm:text-3xl mb-6 mt-20">
-            To Book your ride Call us on&nbsp;
-            <a href="tel:+61459391456"
-              ><u className="text-slate-700">0459 391 456</u></a>
+        <div className='w-2/3 mt-12'>
+          <p className="text-1xl text-justify sm:text-2xl mb-6">
+          Experience the pinnacle of luxury chauffeur services with Victoria Cabs. Contact us today to book your next journey or to discuss how we can tailor our services to meet your specific needs.
+          </p>
+
+          <h3 className="text-2xl text-justify capitalize sm:text-3xl mb-6 mt-16">
+             Call us now&nbsp;
+            <Link href="tel:+61459391456"
+              ><u className="text-slate-700">0459 391 456</u></Link>
           </h3>
-          <p className="text-1xl text-center sm:text-2xl mb-6">
-            Trust us for a reliable and enjoyable taxi service in Melbourne. Your
-            journey begins with us!
-          </p>
-          <p className="text-1xl text-center sm:text-2xl mb-6">
-            Your destination, our commitment.
-          </p>
         </div>
       </div>
     </div>

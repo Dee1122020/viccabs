@@ -4,9 +4,9 @@ import React from 'react'
 function Footer() {
   return (
     <div>
-      <footer className="bg-blue-950 text-gray-300">
-        <div className="mx-auto p-4 flex flex-row sm:flex:row sm:justify-between">
-          <address className='not-italic'>
+      <footer className="bg-blue-950 text-gray-300 p-5">
+        <div className="p-4 flex flex-row sm:flex:row sm:justify-between">
+          <address className='not-italic ml-5'>
             <section className='mb-2'>
               <h2 className='text-2xl'>Victoria Cabs</h2>
               <p>Melbourne<br/>Victoria 3000
@@ -14,7 +14,7 @@ function Footer() {
             </section>
             <section className='mb-2'>
               <p>
-              Email: 
+              Email:&nbsp;
               <Link href="mailto:inquiries@viccabs.com.au"
                 >inquiries@viccabs.com.au</Link>
               </p>
@@ -25,7 +25,7 @@ function Footer() {
             </section>
             
           </address>
-          <nav className="hidden md:flex flex-col gap-2" aria-label="footer">
+          <nav className="hidden md:flex flex-col gap-2 text-2xl" aria-label="footer">
             <Link href="/pages/about" className='link cursor-pointer hover:opacity-40' >
               About Us
             </Link>
