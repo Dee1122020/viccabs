@@ -6,15 +6,24 @@ function Footer() {
     <div>
       <footer className="bg-blue-950 text-gray-300">
         <div className="mx-auto p-4 flex flex-row sm:flex:row sm:justify-between">
-          <address>
-            <h2>Victoria Cabs</h2>
-            Melbourne<br />
-            Victoria 3000<br />
-            Email:
-            <a href="mailto:inquiries@viccabs.com"
-              >inquiries@viccabs.com</a><br />
-            Phone: <a href="tel:+61459391456">0459 391 456</a><br />
-            &emsp;&emsp;&ensp;&ensp;<a href="tel:+61403165754">0403 165 754</a>
+          <address className='not-italic'>
+            <section className='mb-2'>
+              <h2 className='text-2xl'>Victoria Cabs</h2>
+              <p>Melbourne<br/>Victoria 3000
+              </p>
+            </section>
+            <section className='mb-2'>
+              <p>
+              Email: 
+              <a href="mailto:inquiries@viccabs.com.au"
+                >inquiries@viccabs.com.au</a>
+              </p>
+            </section>
+            <section>
+              <p>Phone: <a href="tel:+61459391456">0459 391 456</a><br />&emsp;&emsp;&ensp;&ensp;<a href="tel:+61403165754">0403 165 754</a>
+              </p>
+            </section>
+            
           </address>
           <nav className="hidden md:flex flex-col gap-2" aria-label="footer">
             <Link href="/pages/about" className='link cursor-pointer hover:opacity-40' >
