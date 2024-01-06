@@ -2,7 +2,7 @@ import React from 'react'
 import NavBarMain from './NavBarMain'
 import NavBarMobile from './NavBarMobile'
 
-function NavBar2() {
+function NavBar() {
   return (
     <div>
     <NavBarMain />
@@ -11,4 +11,4 @@ function NavBar2() {
   )
 }
 
-export default NavBar2
+export default NavBar

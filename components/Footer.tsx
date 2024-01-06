@@ -5,8 +5,8 @@ function Footer() {
   return (
     <div>
       <footer className="bg-blue-950 text-gray-300 p-5">
-        <div className="p-4 flex flex-row sm:flex:row sm:justify-between">
-          <address className='not-italic ml-5'>
+        <div className="max-w-7xl mx-auto p-4 flex flex-row sm:flex:row sm:justify-between">
+          <address className='not-italic'>
             <section className='mb-2'>
               <h2 className='text-2xl'>Victoria Cabs</h2>
               <p>Melbourne<br/>Victoria 3000
@@ -25,7 +25,7 @@ function Footer() {
             </section>
             
           </address>
-          <nav className="hidden md:flex flex-col gap-2 text-2xl" aria-label="footer">
+          <nav className="hidden md:flex flex-col gap-1 text-2xl" aria-label="footer">
             <Link href="/" className='link cursor-pointer hover:opacity-40' >
               Home
             </Link>
