@@ -20,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={outfit.className}>
+        <main className='min-h-screen bg-black text-gray-400'>
         <Header/>
         {children}
         <Footer/>
+        </main>
       </body>
     </html>
   )
