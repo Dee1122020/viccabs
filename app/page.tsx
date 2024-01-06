@@ -18,7 +18,7 @@ export default function Home() {
             <p className='text-1xl text mt-4 ml-7'>We have got a fleet of top of the range cars <br/>and professional drivers ...</p>
 
             <p className='text-1xl text mt-4 ml-7 mb-3'>
-              <Link href="/pages/contact" className='link cursor-pointer hover:opacity-40'><u>Book</u></Link>
+              <Link href="/pages/contact" className='link cursor-pointer hover:opacity-40'><u className="text-indigo-500">Book</u></Link>
               &nbsp;Your Ride With Us!</p>
 
           </article>

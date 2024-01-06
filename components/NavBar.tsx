@@ -1,12 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
+import HamburgerButton from './HamburgerButton'
 
 function NavBar() {
   return (
-    <div className='h-20 flex flex-row justify-between items-center px-6 py-1 bg-blue-950 text-gray-300'>
+    <nav className='h-20 flex flex-row justify-between items-center px-6 py-1'>
         <div className='text-3xl font-semibold ml-8'>
             <h1><Link href="/" className='link cursor-pointer hover:opacity-60' >Vic Cabs</Link></h1>
         </div>
+
+        <HamburgerButton />
         
         <div className='mr-6'>
             <ul className='text-2xl font-medium flex flex-row gap-6'>
@@ -27,7 +30,8 @@ function NavBar() {
                 </li>
             </ul>
         </div>
-    </div>
+
+    </nav>
   )
 }
 
