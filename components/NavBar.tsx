@@ -20,6 +20,9 @@ function NavBar() {
                     <Link href="/pages/services" className='link cursor-pointer hover:opacity-40' >Services</Link>
                 </li>
                 <li>
+                    <Link href="/pages/whyChoose" className='link cursor-pointer hover:opacity-40' >Why Choose Us</Link>
+                </li>
+                <li>
                     <Link href="/pages/contact" className='link cursor-pointer hover:opacity-40' >Contact Us</Link>
                 </li>
             </ul>
