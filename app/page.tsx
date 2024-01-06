@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <div className="flex flex-row-reverse gap-2 p-5 bg-black">
-        <div className="w-1/2">
+        <div className="w-1/2 px-7 mt-8">
 
           <img className='opacity-80' src="/FlindersStreetStation.jpg" alt="Melbourne" />
 

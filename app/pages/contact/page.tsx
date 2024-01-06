@@ -9,19 +9,19 @@ function Contact() {
           Contact Us
         </h2>
       </div>
-      <div className='flex flex-col gap-2 p-5 items-center'>
-        <div className="w-1/2">
+      <div className='flex flex-row-reverse gap-5 p-5 items-center'>
+        <div className="w-1/2 px-2">
           <img src="/callcenter.jpg" alt="Call Center" />
         </div>
-        <div className='w-2/3 mt-12'>
+        <div className='w-1/2 items-center p-7'>
           <p className="text-1xl text-justify sm:text-2xl mb-6">
-          Experience the pinnacle of luxury chauffeur services with Victoria Cabs. Contact us today to book your next journey or to discuss how we can tailor our services to meet your specific needs.
+          Experience the pinnacle of luxury chauffeur services and premium taxi services with Victoria Cabs. Contact us today to book your next journey or to discuss how we can tailor our services to meet your specific needs.
           </p>
 
           <h3 className="text-2xl text-justify capitalize sm:text-3xl mb-6 mt-16">
              Call us now&nbsp;
-            <Link href="tel:+61459391456"
-              ><u className="text-slate-700">0459 391 456</u></Link>
+            <Link href="tel:+611300121213"
+              ><u className="text-indigo-700">1300121213</u></Link>
           </h3>
         </div>
       </div>

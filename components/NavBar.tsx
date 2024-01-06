@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 function NavBar() {
   return (
-    <div className='h-20 flex flex-row justify-between items-center p-1 bg-blue-950 text-gray-300'>
+    <div className='h-20 flex flex-row justify-between items-center px-6 py-1 bg-blue-950 text-gray-300'>
         <div className='text-3xl font-semibold ml-8'>
             <h1><Link href="/" className='link cursor-pointer hover:opacity-60' >Vic Cabs</Link></h1>
         </div>

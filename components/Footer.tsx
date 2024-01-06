@@ -20,7 +20,7 @@ function Footer() {
               </p>
             </section>
             <section>
-              <p>Phone: <Link href="tel:+61459391456">0459 391 456</Link><br />&emsp;&emsp;&ensp;&ensp;<a href="tel:+61403165754">0403 165 754</a>
+              <p>Phone: <Link href="tel:+611300121213">1300121213</Link>
               </p>
             </section>
             
