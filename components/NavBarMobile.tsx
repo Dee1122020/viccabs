@@ -5,7 +5,7 @@ function NavBarMobile() {
   return (
     <section
         id="mobile-menu"
-        className="absolute top-68 bg-black w-full text-5xl flex-col justify-content-center origin-top animate-open-menu hidden"
+        className="absolute top-[68px] bg-black w-full text-5xl flex-col justify-content-center origin-top animate-open-menu hidden"
       >
         
         <nav

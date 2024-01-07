@@ -15,13 +15,13 @@ function NavBarMain() {
 
         <HamburgerButton />
 
-            <nav className='hidden md:block text-2xl font-medium space-x-6' aria-label="main">
-                <Link href="/" className='link cursor-pointer hover:opacity-40' >Home</Link>
-                <Link href="/pages/about" className='link cursor-pointer hover:opacity-40' >About Us</Link>
-                <Link href="/pages/services" className='link cursor-pointer hover:opacity-40' >Services</Link>
-                <Link href="/pages/whyChoose" className='link cursor-pointer hover:opacity-40' >Why Choose Us</Link>
-                <Link href="/pages/contact" className='link cursor-pointer hover:opacity-40' >Contact Us</Link>
-            </nav>
+          <nav className='hidden md:block text-2xl font-medium space-x-6' aria-label="main">
+              <Link href="/" className='link cursor-pointer hover:opacity-40' >Home</Link>
+              <Link href="/pages/about" className='link cursor-pointer hover:opacity-40' >About Us</Link>
+              <Link href="/pages/services" className='link cursor-pointer hover:opacity-40' >Services</Link>
+              <Link href="/pages/whyChoose" className='link cursor-pointer hover:opacity-40' >Why Choose Us</Link>
+              <Link href="/pages/contact" className='link cursor-pointer hover:opacity-40' >Contact Us</Link>
+          </nav>
         </div>
 
     </section>
