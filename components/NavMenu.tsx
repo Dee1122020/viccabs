@@ -20,23 +20,23 @@ function NavMenu() {
                 </Link>
             </div>
 
-            <ul className='hidden md:flex font-semibold text-xl capitalize'>
+            <ul className='hidden md:flex font-semibold text-xl'>
                 
                 <li>
-                    <Link href='/' className='hover:opacity-60 mr-4'>
+                    <Link href='/' className='hover:opacity-60 mr-4 capitalize'>
                         Home
                     </Link>
-                    <Link href='/pages/about' className='hover:opacity-60 mr-4'>
-                        about us
+                    <Link href='/pages/about' className='hover:opacity-60 mr-4 capitalize'>
+                        About Us
                     </Link>
-                    <Link href='/pages/services' className='hover:opacity-60 mr-4'>
-                        services
+                    <Link href='/pages/services' className='hover:opacity-60 mr-4 capitalize'>
+                        Services
                     </Link>
-                    <Link href='/pages/whyChoose' className='hover:opacity-60 mr-4'>
-                        why Choose us
+                    <Link href='/pages/whyChoose' className='hover:opacity-60 mr-4 capitalize'>
+                        Why Choose Us
                     </Link>
-                    <Link href='/pages/contact' className='hover:opacity-60 mr-4'>
-                        contact us
+                    <Link href='/pages/contact' className='hover:opacity-60 mr-4 capitalize'>
+                        Contact Us
                     </Link>
                 </li>
 
