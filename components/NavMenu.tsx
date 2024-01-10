@@ -16,7 +16,7 @@ function NavMenu() {
 
             <div>
                 <Link href='/' onClick={handleSmallScreenNavigation}>
-                    <span className='font-bold text-3xl md:2xl capitalize cursor-pointer hover:opacity-60'>Vic Cabs</span>
+                    <span className='font-bold text-3xl md:2xl capitalize cursor-pointer hover:opacity-60 px-4 md:px-0'>Vic Cabs</span>
                 </Link>
             </div>
 

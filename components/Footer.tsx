@@ -15,8 +15,8 @@ function Footer() {
             <section className='mb-2'>
               <p>
               Email:&nbsp;
-              <Link href="mailto:inquiries@viccabs.com.au"
-                >inquiries@viccabs.com.au</Link>
+              <Link href="mailto:admin@viccabs.com.au"
+                >admin@viccabs.com.au</Link>
               </p>
             </section>
             <section>
