@@ -1,4 +1,13 @@
+import { Metadata } from 'next'
 import React from 'react'
+
+export const metadata: Metadata = {
+    title: 'Why Choose Us',
+    description: 'Victoria Cabs: Exquisite Fleet, Professional Drivers, Tailored Experiences, Reliability, Airport Excellence, and Family-Friendliness. Call 1300 121 213.',
+    alternates: {
+        canonical: '/pages/whyChoose',
+      }
+  }
 
 function WhyChoose() {
   return (

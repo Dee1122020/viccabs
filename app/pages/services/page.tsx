@@ -1,4 +1,13 @@
+import { Metadata } from 'next'
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: 'Services',
+  description: 'Explore premium taxi, chauffeur, airport transfer, and family-friendly SUV services at Victoria Cabs. Book your luxury ride now! Call 1300 121 213.',
+  alternates: {
+    canonical: '/pages/services',
+  }
+}
 
 function Services() {
   return (

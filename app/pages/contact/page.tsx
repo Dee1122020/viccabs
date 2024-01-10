@@ -1,5 +1,14 @@
+import { Metadata } from 'next'
 import Link from 'next/link'
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Connect with Victoria Cabs for luxury transport in Melbourne. Book your ride or get in touch for inquiries. Call 1300 121 213 for premium service.',
+  alternates: {
+    canonical: '/pages/contact',
+  }
+}
 
 function Contact() {
   return (
