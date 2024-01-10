@@ -6,7 +6,7 @@ export default function Home() {
       <section className="flex flex-col justify-center sm:flex-row-reverse p-6 items-center gap-8 mb-12 scroll-mt-40 widescreen:section-min-height tallescreen:section-min-height">
         <div className="w-1/2 mt-8">
 
-          <img className='opacity-80' src="/FlindersStreetStation.jpg" alt="Melbourne" />
+          <img className='opacity-80' src="/flinders street station2.jpg" alt="Melbourne" />
 
         </div>
 
