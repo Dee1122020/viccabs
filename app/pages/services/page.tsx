@@ -18,7 +18,7 @@ function Services() {
                 </p>
               </div>
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                <img src="/chauffeur.jpg" alt="Chauffeur" />
+                <img src="/taxiService.jpg" alt="Taxi Service" />
               </div>
             </div>
           </section>
@@ -33,7 +33,7 @@ function Services() {
                 </p>
               </div>
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                <img src="/chauffeur.jpg" alt="Chauffeur" />
+                <img src="/chauffeur2.jpg" alt="Chauffeur Service" />
               </div>
             </div>
           </section>
@@ -48,7 +48,7 @@ function Services() {
                 </p>
               </div>
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                <img src="/chauffeur.jpg" alt="Chauffeur" />
+                <img src="/airport transfer.jpg" alt="Airport Transfer" />
               </div>
             </div>
           </section>
@@ -63,7 +63,7 @@ function Services() {
                 </p>
               </div>
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                <img src="/chauffeur.jpg" alt="Chauffeur" />
+                <img src="/SUV.jpg" alt="SUV" />
               </div>
             </div>
           </section>

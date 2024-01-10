@@ -26,7 +26,7 @@ function About() {
             </p>
           </div>
           <div className='w-5/6 md:w-3/4 p-4 md:p-10'>
-            <img src="/chauffeur.jpg" alt="Chauffeur" />
+            <img src="/luxury car.jpg" alt="Luxury Car" />
           </div> 
         </div>
 
@@ -56,7 +56,7 @@ function About() {
             </p>
           </div>
           <div className='w-5/6 md:w-3/4 p-4 md:p-10'>
-            <img src="/chauffeur.jpg" alt="Chauffeur" />
+            <img src="/excellence.jpg" alt="Excellence" />
           </div>
         </div> 
       </div>
