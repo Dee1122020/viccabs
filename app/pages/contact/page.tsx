@@ -4,7 +4,7 @@ import React from 'react'
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Connect with Victoria Cabs for luxury transport in Melbourne. Book your ride or get in touch for inquiries. Call 1300 121 213 for premium service.',
+  description: 'Connect with Vic Cabs for luxury transport in Melbourne. Book your ride or get in touch for inquiries. Call 1300 121 213 for premium service.',
   alternates: {
     canonical: '/pages/contact',
   }
@@ -24,7 +24,7 @@ function Contact() {
         </div>
         <div className='md:w-1/2 items-center md:p-7'>
           <p className="text-xl font-medium md:text-2xl m-2 px-1 md:m-4 text-justify">
-          Experience the pinnacle of luxury chauffeur services and premium taxi services with Victoria Cabs. Contact us today to book your next journey or to discuss how we can tailor our services to meet your specific needs.
+          Experience the pinnacle of luxury chauffeur services and premium taxi services with Vic Cabs. Contact us today to book your next journey or to discuss how we can tailor our services to meet your specific needs.
           </p>
 
           <h3 className="text-2xl md:text-3xl mb-3 m-2 p-1 md:m-4 font-semibold capitalize">

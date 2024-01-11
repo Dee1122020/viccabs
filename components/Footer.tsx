@@ -8,7 +8,7 @@ function Footer() {
         <div className="max-w-7xl mx-auto p-4 flex flex-row justify-between">
           <address className='not-italic'>
             <section className='mb-2'>
-              <Link href='/pages/about' className='text-2xl cursor-pointer hover:opacity-60'>Victoria Cabs</Link>
+              <Link href='/pages/about' className='text-2xl cursor-pointer hover:opacity-60'>Vic Cabs</Link>
               <p>Melbourne<br/>Victoria 3000
               </p>
             </section>

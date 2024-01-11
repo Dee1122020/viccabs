@@ -3,7 +3,7 @@ import React from 'react'
 
 export const metadata: Metadata = {
     title: 'Why Choose Us',
-    description: 'Victoria Cabs: Exquisite Fleet, Professional Drivers, Tailored Experiences, Reliability, Airport Excellence, and Family-Friendliness. Call 1300 121 213.',
+    description: 'Vic Cabs: Exquisite Fleet, Professional Drivers, Tailored Experiences, Reliability, Airport Excellence, and Family-Friendliness. Call 1300 121 213.',
     alternates: {
         canonical: '/pages/whyChoose',
       }
@@ -13,7 +13,7 @@ function WhyChoose() {
   return (
     <div className='bg-black text-gray-400 flex flex-col px-10 py-3 md:px-0 md:py-0'>
         <section>
-            <h2 className='text-3xl font-semibold text-center mt-6 md:mt-8 py-2 md:text-4xl md:font-semibold md:mb-3 md:py-3'>Why Choose Victoria Cabs</h2>
+            <h2 className='text-3xl font-semibold text-center mt-6 md:mt-8 py-2 md:text-4xl md:font-semibold md:mb-3 md:py-3'>Why Choose Vic Cabs</h2>
         </section>
 
         <div>
@@ -78,7 +78,7 @@ function WhyChoose() {
                 <div className='flex flex-col-reverse gap-3 p-3 md:gap-5 md:p-5 items-center mb-10 md:mb-16'>
                     <div className='md:w-5/6'>
                         <p className='text-xl font-medium md:text-2xl m-2 px-1 md:m-4 text-justify'>
-                        Punctuality and reliability are at the core of our service. When you choose Victoria Cabs, you can trust us to get you to your destination on time, every time.
+                        Punctuality and reliability are at the core of our service. When you choose Vic Cabs, you can trust us to get you to your destination on time, every time.
                         </p>
                     </div>
 
