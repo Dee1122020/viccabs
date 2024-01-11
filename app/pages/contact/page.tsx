@@ -23,7 +23,7 @@ function Contact() {
           <img src="/callcenter.jpg" alt="Call Center" />
         </div>
         <div className='md:w-1/2 items-center md:p-7'>
-          <p className="text-xl font-medium md:text-2xl m-2 px-1 md:m-4 text-justify">
+          <p className="text-xl font-medium md:text-2xl m-2 px-1 md:m-4 md:text-justify">
           Experience the pinnacle of luxury chauffeur services and premium taxi services with Vic Cabs. Contact us today to book your next journey or to discuss how we can tailor our services to meet your specific needs.
           </p>
 
