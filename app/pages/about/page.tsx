@@ -46,7 +46,7 @@ function About() {
         <div className='flex flex-col-reverse gap-3 p-3 md:gap-5 md:p-5 items-center mb-10 md:mb-16'>
           <div className='md:w-5/6'>
             <p className='text-xl font-medium md:text-2xl m-2 px-1 md:m-4 md:text-justify'>
-            Behind the wheel of every Vic Cabs is a highly trained, professional driver who are accredited drivers accredited by state regulatory body for commercial passenger vehicles and commercial passenger vehicle drivers in the state of Victoria, Safe Transport Victoria (STV), dedicated to deliver a superior service. Our chauffeurs embody the values of courtesy, discretion, and reliability. They are not just drivers; they are ambassadors of our commitment to providing an exceptional and personalized experience to our clients.
+            Behind the wheel of every Vic Cabs is a highly trained, professional accredited driver dedicated to deliver an admirable service. Our chauffeurs embody the values of courtesy, discretion, and reliability. They are not just drivers; they are ambassadors of our commitment to provide an exceptional and personalised experience to our prestigious clients.
             </p>
           </div>
           <div className='w-5/6 md:w-3/4 p-4 md:p-10'>

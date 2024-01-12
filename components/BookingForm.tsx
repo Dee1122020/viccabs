@@ -3,6 +3,10 @@ import React, { use, useState } from 'react'
 
 function BookingForm() {
     const[name, setName] = useState('')
+    const[email, setemail] = useState('')
+    const[phone, setphone] = useState('')
+    const[message, setmessage] = useState('')
+
   return (
     <>
         <div>BookingForm</div>

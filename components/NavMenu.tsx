@@ -26,6 +26,9 @@ function NavMenu() {
                     <Link href='/' className='hover:opacity-60 mr-4 capitalize'>
                         Home
                     </Link>
+                    <Link href='/pages/book' className='hover:opacity-60 mr-4 capitalize'>
+                        Book
+                    </Link>
                     <Link href='/pages/about' className='hover:opacity-60 mr-4 capitalize'>
                         About Us
                     </Link>
@@ -53,6 +56,9 @@ function NavMenu() {
 
                         <li onClick={handleSmallScreenNavigation} className='py-5 hover:opacity-60 cursor-pointer'>
                             <Link href='/'>Home</Link>
+                        </li>
+                        <li onClick={handleSmallScreenNavigation} className='py-5 hover:opacity-60 cursor-pointer'>
+                            <Link href='/pages/book'>Book</Link>
                         </li>
                         <li onClick={handleSmallScreenNavigation} className='py-5 hover:opacity-60 cursor-pointer'>
                             <Link href='/pages/about'>about us</Link>

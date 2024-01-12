@@ -30,7 +30,8 @@ function Contact() {
           <h3 className="text-2xl md:text-3xl mb-3 m-2 p-1 md:m-4 font-semibold capitalize">
              Call us now on&nbsp;
             <Link href="tel:+611300121213"
-              ><u className="text-indigo-700">1300121213</u></Link>
+              ><u className="text-indigo-700">1300 12 12 13</u></Link><br/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;
+            <Link href="tel:+61470445670"><u className="text-indigo-700">0470 445 670</u></Link>
           </h3>
         </div>
       </div>
