@@ -19,7 +19,7 @@ function Contact() {
         </h2>
       </div>
       <div className='flex flex-col md:flex-row-reverse gap-5 p-5 items-center'>
-        <div className="md:w-1/2 px-2">
+        <div className="md:w-1/2 px-4">
           <img src="/callcenter.jpg" alt="Call Center" />
         </div>
         <div className='md:w-1/2 items-center md:p-7'>
