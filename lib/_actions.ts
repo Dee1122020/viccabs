@@ -31,8 +31,8 @@ export async function sendEmail(data: BookingInput) {
                 to: 'dee.taxis.au@gmail.com',
                 //reply_to: '',
                 subject: 'New Booking',
-                text: `Name: ${name} \n Email: ${email} \n Phone: ${phone} \n Pick Up Address: ${pickUpAddress} \n Drop Off Address: ${dropOffAddress} \n Date: ${date} \n Time: ${time} \n People: ${people} \n Instruction: ${instruction || ''}`,
-                react: BookingEmail({ name, email, phone, pickUpAddress, dropOffAddress, date, time, people, instructions: instruction || '' })
+                text: `Name: ${name} \n Email: ${email} \n Phone: ${phone} \n Pick Up Address: ${pickUpAddress} \n Drop Off Address: ${dropOffAddress} \n Date: ${date || ''} \n Time: ${time || ''} \n People: ${people} \n Instruction: ${instruction || ''}`,
+                react: BookingEmail({ name, email, phone, pickUpAddress, dropOffAddress, date: date || '', time: time || '', people, instructions: instruction || '' })
             })
             return { success: true, data }
         }

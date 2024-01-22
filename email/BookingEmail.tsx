@@ -6,7 +6,7 @@ interface BookingEmailProps {
     dropOffAddress: string
     date: string
     time: string
-    people: string
+    people: number
     instructions: string
 }
 
@@ -19,7 +19,7 @@ const BookingEmail: React.FC<BookingEmailProps> = ({name, email, phone, pickUpAd
             <p>Pick up address: {pickUpAddress}</p>
             <p>Drop off address: {dropOffAddress}</p>
             <p>My email address is {email} and my phone number is {phone}.</p>
-            <p>Instructions: {instructions}</p>
+            <p>Instructions: {instructions===''?'No instructions':instructions}</p>
         </div>
     )
 }

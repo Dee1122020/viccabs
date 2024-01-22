@@ -9,7 +9,11 @@ import { toast } from 'sonner'
 function BookingForm() {
   const [data, setData] = useState<BookingInput>()
 
-  const { register, handleSubmit, watch, formState:{ errors, isSubmitting}, reset,} = useForm<BookingInput>({resolver: zodResolver(bookingSchema)})
+  const { register, handleSubmit, watch, formState:{ errors, isSubmitting}, reset,} = useForm<BookingInput>({defaultValues: {
+    people: 1,
+      
+  },
+  resolver: zodResolver(bookingSchema)})
 
   const onSubmit: SubmitHandler<BookingInput> = async (data) => {
     const result = await sendEmail(data)
@@ -40,11 +44,11 @@ function BookingForm() {
           {errors.name && <span className='text-red-500'>{errors.name.message}</span>}
 
           <label htmlFor='email'>Email</label>
-          <input type='email' id='email' {...register('email')} placeholder='Email' className='px-4 py-2 rounded'/>
+          <input type='email' id='email' {...register('email')} placeholder='Email address' className='px-4 py-2 rounded'/>
           {errors.email && <span className='text-red-500'>{errors.email.message}</span>}
 
           <label htmlFor='phone'>Phone</label>
-          <input type='text' id='phone' {...register('phone')} placeholder='Phone' className='px-4 py-2 rounded'/>
+          <input type='text' id='phone' {...register('phone')} placeholder='Phone number' className='px-4 py-2 rounded'/>
           {errors.phone && <span className='text-red-500'>{errors.phone.message}</span>}
 
           <label htmlFor='pickUpAddress'>Pickup Address</label>
@@ -55,16 +59,16 @@ function BookingForm() {
           <input type='text' id='dropOffAddress' {...register('dropOffAddress')} placeholder='Dropoff Address' className='px-4 py-2 rounded'/>
           {errors.dropOffAddress && <span className='text-red-500'>{errors.dropOffAddress.message}</span>}
 
-          <label htmlFor='date'>Date</label>
-          <input type='date' id='date' {...register('date')} placeholder='Date' className='px-4 py-2 rounded'/>
+          <label htmlFor='date'>Date of Pickup</label>
+          <input type='date' id='date' {...register('date')} placeholder='Date of pickup' className='px-4 py-2 rounded'/>
           {errors.date && <span className='text-red-500'>{errors.date.message}</span>}
 
-          <label htmlFor='time'>Time</label>
-          <input type='time' id='time' {...register('time')} placeholder='Time' className='px-4 py-2 rounded'/>
+          <label htmlFor='time'>Pickup Time</label>
+          <input type='time' id='time' {...register('time')} placeholder='Pickup time' className='px-4 py-2 rounded'/>
           {errors.time && <span className='text-red-500'>{errors.time.message}</span>}
 
           <label htmlFor='people'>People</label>
-          <input type='number' id='people' {...register('people')} placeholder='Number of people' className='px-4 py-2 rounded'/>
+          <input type='number' id='people' {...register('people', {valueAsNumber: true})} placeholder='Number of people' className='px-4 py-2 rounded'/>
           {errors.people && <span className='text-red-500'>{errors.people.message}</span>}
 
           <label htmlFor='instruction'>Instruction</label>
