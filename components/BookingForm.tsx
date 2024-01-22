@@ -34,44 +34,44 @@ function BookingForm() {
 
   return (
     <div className='flex flex-col py-4 mb-4 w-3/5 mx-auto'>
-      <div><h2 className='text-2xl p-2 text-center'>BookingForm</h2></div>
+      <div><h2 className='text-3xl font-semibold text-center mt-6 md:mt-8 py-2 md:text-4xl md:font-semibold md:mb-3 md:py-3'>BookingForm</h2></div>
 
-      <div className='mb-2'>
+      <div className='mt-2 md:w-3/4 md:mx-auto'>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-y-2'>
 
-          <label htmlFor='name'>Name</label>
+          <label htmlFor='name' className='md:text-2xl md:mb-1 md:mt-2 md:font-medium'>Name</label>
           <input type='text' id='name' {...register('name')} placeholder='Name' className='px-4 py-2 rounded' />
           {errors.name && <span className='text-red-500'>{errors.name.message}</span>}
 
-          <label htmlFor='email'>Email</label>
+          <label htmlFor='email' className='md:text-2xl md:mb-1 md:mt-2 md:font-medium'>Email</label>
           <input type='email' id='email' {...register('email')} placeholder='Email address' className='px-4 py-2 rounded'/>
           {errors.email && <span className='text-red-500'>{errors.email.message}</span>}
 
-          <label htmlFor='phone'>Phone</label>
+          <label htmlFor='phone' className='md:text-2xl md:mb-1 md:mt-2 md:font-medium'>Phone</label>
           <input type='text' id='phone' {...register('phone')} placeholder='Phone number' className='px-4 py-2 rounded'/>
           {errors.phone && <span className='text-red-500'>{errors.phone.message}</span>}
 
-          <label htmlFor='pickUpAddress'>Pickup Address</label>
+          <label htmlFor='pickUpAddress' className='md:text-2xl md:mb-1 md:mt-2 md:font-medium'>Pickup Address</label>
           <input type='text' id='pickUpAddress' {...register('pickUpAddress')} placeholder='Pickup Address' className='px-4 py-2 rounded'/>
           {errors.pickUpAddress && <span className='text-red-500'>{errors.pickUpAddress.message}</span>}
 
-          <label htmlFor='dropOffAddress'>Dropoff Address</label>
+          <label htmlFor='dropOffAddress' className='md:text-2xl md:mb-1 md:mt-2 md:font-medium'>Dropoff Address</label>
           <input type='text' id='dropOffAddress' {...register('dropOffAddress')} placeholder='Dropoff Address' className='px-4 py-2 rounded'/>
           {errors.dropOffAddress && <span className='text-red-500'>{errors.dropOffAddress.message}</span>}
 
-          <label htmlFor='date'>Date of Pickup</label>
+          <label htmlFor='date' className='md:text-2xl md:mb-1 md:mt-2 md:font-medium'>Date of Pickup</label>
           <input type='date' id='date' {...register('date')} placeholder='Date of pickup' className='px-4 py-2 rounded'/>
           {errors.date && <span className='text-red-500'>{errors.date.message}</span>}
 
-          <label htmlFor='time'>Pickup Time</label>
+          <label htmlFor='time' className='md:text-2xl md:mb-1 md:mt-2 md:font-medium'>Pickup Time</label>
           <input type='time' id='time' {...register('time')} placeholder='Pickup time' className='px-4 py-2 rounded'/>
           {errors.time && <span className='text-red-500'>{errors.time.message}</span>}
 
-          <label htmlFor='people'>People</label>
+          <label htmlFor='people' className='md:text-2xl md:mb-1 md:mt-2 md:font-medium'>People</label>
           <input type='number' id='people' {...register('people', {valueAsNumber: true})} placeholder='Number of people' className='px-4 py-2 rounded'/>
           {errors.people && <span className='text-red-500'>{errors.people.message}</span>}
 
-          <label htmlFor='instruction'>Instruction</label>
+          <label htmlFor='instruction' className='md:text-2xl md:mb-1 md:mt-2 md:font-medium'>Instruction</label>
           <textarea id='instruction' {...register('instruction')} placeholder='instruction' className='px-4 py-2 rounded mb-2'/>
           {errors.instruction && <span className='text-red-500'>{errors.instruction.message}</span>}
 

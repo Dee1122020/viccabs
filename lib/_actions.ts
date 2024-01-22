@@ -27,9 +27,10 @@ export async function sendEmail(data: BookingInput) {
 
         try{
             const data = await resend.emails.send({
-                from: 'onboarding@resend.dev',
-                to: 'dee.taxis.au@gmail.com',
-                //reply_to: '',
+                from: 'Vic Cabs <booking@viccabs.com.au>',
+                to: ['dee.taxis.au@gmail.com', 'admin@viccabs.com.au'],
+                //cc: 'dee.taxis.au@gmail.com',
+                reply_to: `${email}`,
                 subject: 'New Booking',
                 text: `Name: ${name} \n Email: ${email} \n Phone: ${phone} \n Pick Up Address: ${pickUpAddress} \n Drop Off Address: ${dropOffAddress} \n Date: ${date || ''} \n Time: ${time || ''} \n People: ${people} \n Instruction: ${instruction || ''}`,
                 react: BookingEmail({ name, email, phone, pickUpAddress, dropOffAddress, date: date || '', time: time || '', people, instructions: instruction || '' })
