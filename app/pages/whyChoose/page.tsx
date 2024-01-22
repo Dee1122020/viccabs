@@ -3,7 +3,7 @@ import React from 'react'
 
 export const metadata: Metadata = {
     title: 'Why Choose Us',
-    description: 'Vic Cabs: Exquisite Fleet, Professional Drivers, Tailored Experiences, Reliability, Airport Excellence, and Family-Friendliness. Call 1300 121 213.',
+    description: 'Vic Cabs: Exquisite Fleet, Professional Drivers, Tailored Experiences, Reliability, Airport Excellence, and Family-Friendliness. Visit our Book page to book online.',
     alternates: {
         canonical: '/pages/whyChoose',
       }

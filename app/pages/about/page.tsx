@@ -3,7 +3,7 @@ import React from 'react'
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'Discover the epitome of luxury travel at Vic Cabs. Top-tier chauffeur services and premium vehicles await. Call 1300 121 213 to redefine your journey.',
+  description: 'Discover the epitome of luxury travel at Vic Cabs. Top-tier chauffeur services and premium vehicles await. Book online to redefine your journey.',
   alternates: {
     canonical: '/pages/about',
   }
