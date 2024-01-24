@@ -1,4 +1,6 @@
-import Link from "next/link";
+import Link from "next/link"
+import Image from "next/image"
+import flindersStreetStation2 from '../public/flinders street station2.jpg';
 
 export default function Home() {
   return (
@@ -6,7 +8,16 @@ export default function Home() {
       <section className="flex flex-col justify-center sm:flex-row-reverse p-6 items-center gap-8 mb-12 scroll-mt-40 widescreen:section-min-height tallescreen:section-min-height">
         <div className="w-1/2 mt-8">
 
-          <img className='opacity-80' src="/flinders street station2.jpg" alt="Melbourne" />
+         {/*<img className='opacity-80' src="/flinders street station2.jpg" alt="Melbourne" />*/}
+
+          <Image
+            src={flindersStreetStation2}
+            alt="Melbourne"
+            className='opacity-80'
+            layout="responsive"
+            width={500}
+            height={500}
+          />
 
         </div>
 

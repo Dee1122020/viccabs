@@ -1,5 +1,10 @@
 import { Metadata } from 'next'
 import React from 'react'
+import Image from 'next/image'
+import taxiService from '../../../public/taxiService.jpg'
+import chauffeur2 from '../../../public/chauffeur2.jpg'
+import airportTransfer from '../../../public/airport transfer.jpg'
+import SUV from '../../../public/SUV.jpg'
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -27,7 +32,11 @@ function Services() {
                 </p>
               </div>
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                <img src="/taxiService.jpg" alt="Taxi Service" />
+                {/*<img src="/taxiService.jpg" alt="Taxi Service" />*/}
+                <Image 
+                  src={taxiService}
+                  alt='Taxi Service'
+                />
               </div>
             </div>
           </section>
@@ -42,7 +51,11 @@ function Services() {
                 </p>
               </div>
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                <img src="/chauffeur2.jpg" alt="Chauffeur Service" />
+                {/*<img src="/chauffeur2.jpg" alt="Chauffeur Service" />*/}
+                <Image 
+                  src={chauffeur2}
+                  alt='Chauffeur Service'
+                />
               </div>
             </div>
           </section>
@@ -57,7 +70,11 @@ function Services() {
                 </p>
               </div>
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                <img src="/airport transfer.jpg" alt="Airport Transfer" />
+                {/*<img src="/airport transfer.jpg" alt="Airport Transfer" />*/}
+                <Image 
+                  src={airportTransfer}
+                  alt='Airport Transfer'
+                />
               </div>
             </div>
           </section>
@@ -72,7 +89,11 @@ function Services() {
                 </p>
               </div>
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                <img src="/SUV.jpg" alt="SUV" />
+                {/*<img src="/SUV.jpg" alt="SUV" />*/}
+                <Image 
+                  src={SUV}
+                  alt='SUV'
+                />
               </div>
             </div>
           </section>

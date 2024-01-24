@@ -1,5 +1,9 @@
 import { Metadata } from 'next'
 import React from 'react'
+import Image from 'next/image'
+import luxuryCar3 from '../../../public/luxuryCar3.jpg'
+import chauffeur from '../../../public/chauffeur.jpg'
+import excellence from '../../../public/excellence.jpg'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -35,7 +39,14 @@ function About() {
             </p>
           </div>
           <div className='w-5/6 md:w-3/4 p-4 md:p-10'>
-            <img src="/luxury car3.jpg" alt="Luxury Car" />
+
+            {/*<img src="/luxury car3.jpg" alt="Luxury Car" />*/}
+
+            <Image 
+              src={luxuryCar3}
+              alt='Luxury Car' 
+            />
+            
           </div> 
         </div>
 
@@ -50,7 +61,12 @@ function About() {
             </p>
           </div>
           <div className='w-5/6 md:w-3/4 p-4 md:p-10'>
-            <img src="/chauffeur.jpg" alt="Chauffeur" />
+            {/*<img src="/chauffeur.jpg" alt="Chauffeur" />*/}
+
+            <Image 
+              src={chauffeur}
+              alt='Chauffeur'
+            />
           </div> 
         </div>
 
@@ -65,7 +81,12 @@ function About() {
             </p>
           </div>
           <div className='w-5/6 md:w-3/4 p-4 md:p-10'>
-            <img src="/excellence.jpg" alt="Excellence" />
+            {/*<img src="/excellence.jpg" alt="Excellence" />*/}
+
+            <Image 
+              src={excellence}
+              alt='Excellence'
+            />
           </div>
         </div> 
       </div>

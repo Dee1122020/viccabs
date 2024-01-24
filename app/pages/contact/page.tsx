@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import React from 'react'
+import Image from 'next/image'
+import callcenter from '../../../public/callcenter.jpg'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -20,7 +22,12 @@ function Contact() {
       </div>
       <div className='flex flex-col md:flex-row-reverse gap-5 p-5 items-center'>
         <div className="md:w-1/2 px-4">
-          <img src="/callcenter.jpg" alt="Call Center" />
+          {/*<img src="/callcenter.jpg" alt="Call Center" />*/}
+
+          <Image 
+            src={callcenter}
+            alt='Call Center'
+          />
         </div>
         <div className='md:w-1/2 items-center md:p-7'>
           <p className="text-xl font-medium md:text-2xl m-2 px-1 md:m-4 md:text-justify">

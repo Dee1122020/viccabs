@@ -1,5 +1,12 @@
 import { Metadata } from 'next'
 import React from 'react'
+import Image from 'next/image'
+import luxuryCar2 from '../../../public/luxury car2.jpg'
+import chauffeur3 from '../../../public/chauffeur3.jpg'
+import femaleDriver from '../../../public/female driver.jpg'
+import womanInTheCar from '../../../public/woman in the car.jpg'
+import airportTransfer2 from '../../../public/airport transfer2.jpg'
+import familyFriendly from '../../../public/family friendly.jpg'
 
 export const metadata: Metadata = {
     title: 'Why Choose Us',
@@ -29,7 +36,11 @@ function WhyChoose() {
                     </div>
 
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                        <img src="/luxury car2.jpg" alt="Luxury Car" />
+                        {/*<img src="/luxury car2.jpg" alt="Luxury Car" />*/}
+                        <Image 
+                            src={luxuryCar2}
+                            alt='Luxury Car'
+                        />
                     </div>
 
                 </div>
@@ -47,7 +58,11 @@ function WhyChoose() {
                     </div>
 
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                        <img src="/chauffeur3.jpg" alt="Proffessional Driver" />
+                        {/*<img src="/chauffeur3.jpg" alt="Proffessional Driver" />*/}
+                        <Image 
+                            src={chauffeur3}
+                            alt='Professional Driver'
+                        />
                     </div>
 
                 </div>
@@ -65,7 +80,11 @@ function WhyChoose() {
                     </div>
 
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                        <img src="/female driver.jpg" alt="Call Center" />
+                        {/*<img src="/female driver.jpg" alt="Call Center" />*/}
+                        <Image 
+                            src={femaleDriver}
+                            alt='Tailored Experience'
+                        />
                     </div>
 
                 </div>
@@ -83,7 +102,11 @@ function WhyChoose() {
                     </div>
 
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                        <img src="/woman in the car.jpg" alt="Reliable Service" />
+                        {/*<img src="/woman in the car.jpg" alt="Reliable Service" />*/}
+                        <Image 
+                            src={womanInTheCar}
+                            alt='Reliable Service'
+                        />
                     </div>
 
                 </div>
@@ -101,7 +124,11 @@ function WhyChoose() {
                     </div>
 
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                        <img src="/airport transfer2.jpg" alt="Airport Service" />
+                        {/*<img src="/airport transfer2.jpg" alt="Airport Service" />*/}
+                        <Image 
+                            src={airportTransfer2}
+                            alt='Airport Service'
+                        />
                     </div>
 
                 </div>
@@ -119,7 +146,11 @@ function WhyChoose() {
                     </div>
 
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
-                        <img src="/family friendly.jpg" alt="Family Friendly Service" />
+                        {/*<img src="/family friendly.jpg" alt="Family Friendly Service" />*/}
+                        <Image 
+                            src={familyFriendly}
+                            alt='Family Friendly Service'
+                        />
                     </div>
 
                 </div>
