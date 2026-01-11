@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Use commitizen for interactive commit messages
+if [ -t 1 ]; then
+  # Only run commitizen if we're in an interactive terminal
+  npx cz --hook || true
+fi
