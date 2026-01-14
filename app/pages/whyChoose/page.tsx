@@ -1,12 +1,6 @@
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'
-import luxuryCar2 from '/luxury-car2.jpg'
-import chauffeur3 from '/chauffeur3.jpg'
-import femaleDriver from '/female-driver.jpg'
-import womanInTheCar from '/woman-in-the-car.jpg'
-import airportTransfer2 from '/airport-transfer2.jpg'
-import familyFriendly from '/family-friendly.jpg'
 
 export const metadata: Metadata = {
     title: 'Why Choose Vic Cabs - Best Taxi & Chauffeur Service Melbourne',
@@ -60,8 +54,10 @@ function WhyChoose() {
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                         {/*<img src="/luxury car2.jpg" alt="Luxury Car" />*/}
                         <Image 
-                            src={luxuryCar2}
+                            src="/luxury-car2.jpg"
                             alt='Exquisite luxury car fleet Melbourne - Premium taxi vehicles'
+                            width={800}
+                            height={600}
                         />
                     </div>
 
@@ -88,8 +84,10 @@ function WhyChoose() {
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                         {/*<img src="/chauffeur3.jpg" alt="Proffessional Driver" />*/}
                         <Image 
-                            src={chauffeur3}
+                            src="/chauffeur3.jpg"
                             alt='Professional taxi drivers Melbourne - Licensed chauffeurs'
+                            width={800}
+                            height={600}
                         />
                     </div>
 
@@ -116,8 +114,10 @@ function WhyChoose() {
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                         {/*<img src="/female driver.jpg" alt="Call Center" />*/}
                         <Image 
-                            src={femaleDriver}
+                            src="/female-driver.jpg"
                             alt='Tailored taxi experience Melbourne - Personalized service'
+                            width={800}
+                            height={600}
                         />
                     </div>
 
@@ -144,8 +144,10 @@ function WhyChoose() {
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                         {/*<img src="/woman in the car.jpg" alt="Reliable Service" />*/}
                         <Image 
-                            src={womanInTheCar}
+                            src="/woman-in-the-car.jpg"
                             alt='Reliable taxi service Melbourne - Trusted transport'
+                            width={800}
+                            height={600}
                         />
                     </div>
 
@@ -172,8 +174,10 @@ function WhyChoose() {
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                         {/*<img src="/airport transfer2.jpg" alt="Airport Service" />*/}
                         <Image 
-                            src={airportTransfer2}
+                            src="/airport-transfer2.jpg"
                             alt='Melbourne airport transfer excellence - Reliable airport taxi'
+                            width={800}
+                            height={600}
                         />
                     </div>
 
@@ -200,8 +204,10 @@ function WhyChoose() {
                     <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                         {/*<img src="/family friendly.jpg" alt="Family Friendly Service" />*/}
                         <Image 
-                            src={familyFriendly}
+                            src="/family-friendly.jpg"
                             alt='Family-friendly taxi Melbourne - 7 seater SUV service'
+                            width={800}
+                            height={600}
                         />
                     </div>
 

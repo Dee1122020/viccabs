@@ -1,11 +1,6 @@
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'
-import taxiService from '/taxi-service.jpg'
-import chauffeur2 from '/chauffeur2.jpg'
-import airportTransfer from '/airport-transfer.jpg'
-import SUV from '/suv.jpg'
-import flindersStreetStation from '/flinders-street-station.jpg'
 
 export const metadata: Metadata = {
   title: 'Our Services - Melbourne Taxi, Chauffeur, Airport Transfer & Delivery',
@@ -63,8 +58,10 @@ function Services() {
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                 {/*<img src="/taxiService.jpg" alt="Taxi Service" />*/}
                 <Image 
-                  src={taxiService}
+                  src="/taxi-service.jpg"
                   alt='Premium taxi service Melbourne - 24/7 taxi booking'
+                  width={800}
+                  height={600}
                 />
               </div>
             </div>
@@ -88,8 +85,10 @@ function Services() {
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                 {/*<img src="/chauffeur2.jpg" alt="Chauffeur Service" />*/}
                 <Image 
-                  src={chauffeur2}
+                  src="/chauffeur2.jpg"
                   alt='Luxury chauffeur service Melbourne - Executive car service'
+                  width={800}
+                  height={600}
                 />
               </div>
             </div>
@@ -113,8 +112,10 @@ function Services() {
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                 {/*<img src="/airport transfer.jpg" alt="Airport Transfer" />*/}
                 <Image 
-                  src={airportTransfer}
+                  src="/airport-transfer.jpg"
                   alt='Melbourne airport taxi - Airport transfer service Tullamarine'
+                  width={800}
+                  height={600}
                 />
               </div>
             </div>
@@ -138,8 +139,10 @@ function Services() {
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                 {/*<img src="/SUV.jpg" alt="SUV" />*/}
                 <Image 
-                  src={SUV}
+                  src="/suv.jpg"
                   alt='Family SUV taxi Melbourne - 7 seater taxi service'
+                  width={800}
+                  height={600}
                 />
               </div>
             </div>
@@ -163,8 +166,10 @@ function Services() {
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>
                 {/*<img src="/flinders-street-station.jpg" alt="Delivery Service" />*/}
                 <Image 
-                  src={flindersStreetStation}
+                  src="/flinders-street-station.jpg"
                   alt='Package delivery service Melbourne - Reliable courier service'
+                  width={800}
+                  height={600}
                 />
               </div>
             </div>

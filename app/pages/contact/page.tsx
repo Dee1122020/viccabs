@@ -2,7 +2,6 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-import callcenter from '/callcenter.jpg'
 
 export const metadata: Metadata = {
   title: 'Contact Vic Cabs - Book Melbourne Taxi & Chauffeur Service',
@@ -39,8 +38,10 @@ function Contact() {
       <div className='flex flex-col md:flex-row-reverse gap-5 p-5 items-center mb-8'>
         <div className="md:w-1/2 px-4">
           <Image 
-            src={callcenter}
+            src="/callcenter.jpg"
             alt='Contact Vic Cabs Melbourne taxi service'
+            width={800}
+            height={600}
           />
         </div>
         <div className='md:w-1/2 items-center md:p-7'>

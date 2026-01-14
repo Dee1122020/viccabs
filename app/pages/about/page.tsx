@@ -1,9 +1,6 @@
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'
-import luxuryCar3 from '/luxury-car3.jpg'
-import chauffeur from '/chauffeur.jpg'
-import excellence from '/excellence.jpg'
 
 export const metadata: Metadata = {
   title: 'About Vic Cabs - Premier Melbourne Taxi & Chauffeur Company',
@@ -71,8 +68,10 @@ function About() {
             {/*<img src="/luxury car3.jpg" alt="Luxury Car" />*/}
 
             <Image 
-              src={luxuryCar3}
-              alt='Luxury chauffeur car Melbourne - Premium taxi fleet' 
+              src="/luxury-car3.jpg"
+              alt='Luxury chauffeur car Melbourne - Premium taxi fleet'
+              width={800}
+              height={600}
             />
             
           </div> 
@@ -98,8 +97,10 @@ function About() {
             {/*<img src="/chauffeur.jpg" alt="Chauffeur" />*/}
 
             <Image 
-              src={chauffeur}
+              src="/chauffeur.jpg"
               alt='Professional chauffeur Melbourne - Licensed taxi driver'
+              width={800}
+              height={600}
             />
           </div> 
         </div>
@@ -124,8 +125,10 @@ function About() {
             {/*<img src="/excellence.jpg" alt="Excellence" />*/}
 
             <Image 
-              src={excellence}
+              src="/excellence.jpg"
               alt='Excellence in Melbourne taxi and chauffeur service'
+              width={800}
+              height={600}
             />
           </div>
         </div> 

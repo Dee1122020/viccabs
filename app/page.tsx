@@ -1,7 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Metadata } from "next"
-import flindersStreetStation2 from '/flinders-street-station2.jpg';
 
 export const metadata: Metadata = {
   title: 'Melbourne Taxi Service | Airport Transfer | Chauffeur Service',
@@ -43,7 +42,7 @@ export default function Home() {
       <section className="flex flex-col justify-center p-4 md:p-6 items-center gap-6 md:gap-8 mb-12 md:mb-16 lg:flex-row-reverse lg:items-start">
         <div className="w-full mt-4 md:w-1/2 lg:mt-8">
           <Image
-            src={flindersStreetStation2}
+            src="/flinders-street-station2.jpg"
             alt="Melbourne taxi service - Premium transport in Melbourne CBD"
             className='opacity-80 rounded-lg w-full h-auto'
             width={500}
