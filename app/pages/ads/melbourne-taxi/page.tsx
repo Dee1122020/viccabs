@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function MelbourneTaxiAdPage() {
   return (
     <main className="min-h-screen bg-black text-gray-400 flex items-center justify-center px-4 py-8 md:py-0">
-        <div className="w-full max-w-xl bg-gray-900 shadow-lg rounded-lg p-4 md:p-6">
+        <div className="w-full max-w-xl md:max-w-2xl lg:max-w-4xl bg-gray-900 shadow-lg rounded-lg p-4 md:p-6">
           
           {/* Headline */}
           <h1 className="text-xl md:text-2xl font-bold text-center mb-2 text-gray-300">

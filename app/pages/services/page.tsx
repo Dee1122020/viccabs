@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'
-import taxiService from '../../../public/taxi-service.jpg'
-import chauffeur2 from '../../../public/chauffeur2.jpg'
-import airportTransfer from '../../../public/airport-transfer.jpg'
-import SUV from '../../../public/suv.jpg'
-import flindersStreetStation from '../../../public/flinders-street-station.jpg'
+import taxiService from '/taxi-service.jpg'
+import chauffeur2 from '/chauffeur2.jpg'
+import airportTransfer from '/airport-transfer.jpg'
+import SUV from '/suv.jpg'
+import flindersStreetStation from '/flinders-street-station.jpg'
 
 export const metadata: Metadata = {
   title: 'Our Services - Melbourne Taxi, Chauffeur, Airport Transfer & Delivery',

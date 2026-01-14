@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Metadata } from "next"
-import flindersStreetStation2 from '../public/flinders-street-station2.jpg';
+import flindersStreetStation2 from '/flinders-street-station2.jpg';
 
 export const metadata: Metadata = {
   title: 'Melbourne Taxi Service | Airport Transfer | Chauffeur Service',

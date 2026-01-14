@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-import callcenter from '../../../public/callcenter.jpg'
+import callcenter from '/callcenter.jpg'
 
 export const metadata: Metadata = {
   title: 'Contact Vic Cabs - Book Melbourne Taxi & Chauffeur Service',

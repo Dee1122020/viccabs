@@ -1,6 +1,8 @@
 {
-  "name": "viccabs-nextjs",
+  "name": "viccabs",
   "version": "0.1.0",
+  "description": "Vic Cabs",
+  "author": "Vic Cabs",
   "private": true,
   "scripts": {
     "dev": "next dev",

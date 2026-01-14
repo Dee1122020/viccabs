@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'
-import luxuryCar3 from '../../../public/luxury-car3.jpg'
-import chauffeur from '../../../public/chauffeur.jpg'
-import excellence from '../../../public/excellence.jpg'
+import luxuryCar3 from '/luxury-car3.jpg'
+import chauffeur from '/chauffeur.jpg'
+import excellence from '/excellence.jpg'
 
 export const metadata: Metadata = {
   title: 'About Vic Cabs - Premier Melbourne Taxi & Chauffeur Company',
