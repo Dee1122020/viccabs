@@ -40,6 +40,18 @@ function formatAustralianPhone(phoneNumber: string): string {
   return digits;
 }
 
+function getServiceTypeLabel(serviceType: string): string {
+  const labels: Record<string, string> = {
+    'sedan': 'Sedan',
+    'suv-5': 'SUV (5 Seater)',
+    'suv-7': 'SUV (7 Seater)',
+    'taxi-van-10': 'Taxi Van (10 Seater)',
+    'wheelchair-van': 'Wheelchair Accessible Van',
+    'parcel-delivery': 'Parcel Delivery'
+  }
+  return labels[serviceType] || serviceType
+}
+
 function formatBookingMessage(booking: BookingInput): string {
   return `🚖 *NEW CAB BOOKING* 🚖
 
@@ -53,7 +65,7 @@ function formatBookingMessage(booking: BookingInput): string {
 🎯 Dropoff: ${booking.dropOffAddress}
 📅 Date: ${booking.date}
 🕒 Time: ${booking.time}
-👥 Passengers: ${booking.people.toString()}
+🚗 Service: ${getServiceTypeLabel(booking.serviceType)}
 
 📝 Requests: ${booking.instruction || 'None'}
 
@@ -67,7 +79,9 @@ async function sendWhatsAppMessage(
 ): Promise<{ success: boolean; messageId?: string }> {
   try {
     const formattedPhone = formatAustralianPhone(phoneNumber);
-    const GREEN_API_URL = `https://7105.api.greenapi.com/waInstance${process.env.GREEN_API_ID_INSTANCE}/sendMessage/${process.env.GREEN_API_TOKEN_INSTANCE}`;
+
+    const BASE_URL = process.env.GREEN_API_BASE_URL;
+    const GREEN_API_URL = `${BASE_URL}${process.env.GREEN_API_ID_INSTANCE}/sendMessage/${process.env.GREEN_API_TOKEN_INSTANCE}`;
     
     const response = await axios.post(
       GREEN_API_URL,
@@ -88,12 +102,9 @@ async function sendWhatsAppMessage(
 }
 
 export async function sendBookingWhatsApp(booking: BookingInput): Promise<{ success: boolean; data?: any; error?: string }> {
-  console.log('WHATSAPP_RECIPIENTS env:', process.env.WHATSAPP_RECIPIENTS);
-  console.log('GREEN_API_ID_INSTANCE env:', process.env.GREEN_API_ID_INSTANCE ? 'Set' : 'Not set');
   
   const recipients = process.env.WHATSAPP_RECIPIENTS?.split(',').map(r => r.trim()) || [];
 
-  console.log('Parsed recipients:', recipients);
   
   if (recipients.length === 0) {
     return { success: false, error: 'No recipients configured' };
@@ -106,7 +117,7 @@ export async function sendBookingWhatsApp(booking: BookingInput): Promise<{ succ
 
   for (const recipient of recipients) {
     const result = await sendWhatsAppMessage(recipient.trim(), message);
-    console.log(`WhatsApp to ${recipient}: ${result.success ? '✓' : '✗'}`);
+    //console.log(`WhatsApp to ${recipient}: ${result.success ? '✓' : '✗'}`);
     
     if (result.success) {
       successCount++;
@@ -129,7 +140,7 @@ export async function sendEmail(data: BookingInput) {
     const result = bookingSchema.safeParse(data)
 
     if(result.success){
-        const { name, email, phone, pickUpAddress, dropOffAddress, date, time, people, instruction } = result.data
+        const { name, email, phone, pickUpAddress, dropOffAddress, date, time, serviceType, instruction } = result.data
 
         try{
             const data = await resend.emails.send({
@@ -138,8 +149,8 @@ export async function sendEmail(data: BookingInput) {
                 //cc: 'dee.taxis.au@gmail.com',
                 reply_to: `${email}`,
                 subject: 'New Booking',
-                text: `Name: ${name} \n Email: ${email} \n Phone: ${phone} \n Pick Up Address: ${pickUpAddress} \n Drop Off Address: ${dropOffAddress} \n Date: ${date || ''} \n Time: ${time || ''} \n People: ${people} \n Instruction: ${instruction || ''}`,
-                react: BookingEmail({ name, email, phone, pickUpAddress, dropOffAddress, date: date || '', time: time || '', people, instructions: instruction || '' })
+                text: `Name: ${name} \n Email: ${email} \n Phone: ${phone} \n Pick Up Address: ${pickUpAddress} \n Drop Off Address: ${dropOffAddress} \n Date: ${date || ''} \n Time: ${time || ''} \n Service Type: ${getServiceTypeLabel(serviceType)} \n Instruction: ${instruction || ''}`,
+                react: BookingEmail({ name, email, phone, pickUpAddress, dropOffAddress, date: date || '', time: time || '', serviceType, instructions: instruction || '' })
             })
             return { success: true, data }
         }

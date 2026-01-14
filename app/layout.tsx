@@ -9,22 +9,77 @@ const outfit = Outfit({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL('https://viccabs.com.au'),
   title: {
-    default: 'Vic Cabs | Premier Melbourne Transport',
-    template: '%s | Vic Cabs | Premier Melbourne Transport'
+    default: 'Vic Cabs | Premier Melbourne Taxi & Chauffeur Service',
+    template: '%s | Vic Cabs'
   },
-  description: 'Vic Cabs - Premier transport in Melbourne. Luxurious taxis, chauffeurs, and SUVs. Book now! Book online for unparalleled journeys.',
-  applicationName: 'Viccabs',
-  keywords: ['chauffeur melbourne', 'chauffeur service melbourne', 'chauffeur cars melbourne', 'chauffeured cars melbourne', 'chauffeur car melbourne airport', 'chauffeurs melbourne', 'corporate chauffeur service', 'taxi booking melbourne', 'taxi booking melbourne airport', 'book a taxi to melbourne airport', 'melbourne taxi booking'],
-  authors: [{ name: 'Sarfaraj Shahjahan' }],
+  description: 'Premium taxi and chauffeur service in Melbourne. 24/7 airport transfers, luxury vehicles, professional drivers. Book your Melbourne taxi online or call 0477 226 627 for instant booking.',
+  applicationName: 'Vic Cabs',
+  keywords: [
+    'melbourne taxi',
+    'melbourne airport taxi',
+    'chauffeur service melbourne',
+    'airport transfer melbourne',
+    'taxi booking melbourne',
+    'luxury taxi melbourne',
+    'corporate chauffeur melbourne',
+    'melbourne cab service',
+    'tullamarine airport taxi',
+    '24/7 taxi melbourne',
+    'premium taxi service melbourne',
+    'book taxi melbourne online',
+    'melbourne taxi booking',
+    'chauffeur cars melbourne',
+    'airport pickup melbourne'
+  ],
+  authors: [{ name: 'Vic Cabs' }],
   creator: 'Vic Cabs',
   publisher: 'Vic Cabs',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   alternates: {
     canonical: '/',
     languages: {
-      'en-US': '/en-US',
+      'en-AU': '/en-AU',
     },
   },
-
+  openGraph: {
+    type: 'website',
+    locale: 'en_AU',
+    url: 'https://viccabs.com.au',
+    siteName: 'Vic Cabs',
+    title: 'Vic Cabs | Premier Melbourne Taxi & Chauffeur Service',
+    description: 'Premium taxi and chauffeur service in Melbourne. 24/7 airport transfers, luxury vehicles, professional drivers. Book your Melbourne taxi online now.',
+    images: [
+      {
+        url: '/flinders-street-station2.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Vic Cabs - Premium Melbourne Taxi Service',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vic Cabs | Premier Melbourne Taxi & Chauffeur Service',
+    description: 'Premium taxi and chauffeur service in Melbourne. 24/7 airport transfers, luxury vehicles, professional drivers.',
+    images: ['/flinders-street-station2.jpg'],
+    creator: '@viccabs',
+  },
+  verification: {
+    google: 'your-google-verification-code',
+    other: {
+      'msvalidate.01': 'your-bing-verification-code',
+    },
+  },
 }
 
 export default function RootLayout({
@@ -32,9 +87,111 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': 'https://viccabs.com.au',
+    name: 'Vic Cabs',
+    alternateName: 'Victoria Cabs Melbourne',
+    description: 'Premium taxi and chauffeur service in Melbourne offering 24/7 airport transfers, luxury vehicles, and professional drivers.',
+    url: 'https://viccabs.com.au',
+    telephone: '+61477226627',
+    priceRange: '$$',
+    image: 'https://viccabs.com.au/flinders-street-station2.jpg',
+    logo: 'https://viccabs.com.au/car.png',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Melbourne',
+      addressRegion: 'VIC',
+      addressCountry: 'AU',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: -37.8136,
+      longitude: 144.9631,
+    },
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Melbourne',
+      },
+      {
+        '@type': 'State',
+        name: 'Victoria',
+      },
+    ],
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ],
+      opens: '00:00',
+      closes: '23:59',
+    },
+    serviceType: [
+      'Taxi Service',
+      'Chauffeur Service',
+      'Airport Transfer',
+      'Corporate Transportation',
+      'Luxury Car Service',
+    ],
+    paymentAccepted: 'Cash, Credit Card, Debit Card',
+    currenciesAccepted: 'AUD',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Taxi and Chauffeur Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Premium Taxi Service',
+            description: 'Professional taxi service in Melbourne with modern vehicles and experienced drivers',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Chauffeur Service',
+            description: 'Luxury chauffeur service for corporate and special occasions',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Airport Transfer',
+            description: 'Reliable airport transfer service to and from Melbourne Airport',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Family SUV Service',
+            description: 'Spacious SUV taxi service for families and groups',
+          },
+        },
+      ],
+    },
+  }
+
   return (
-    <html lang="en">
-      <body className={outfit.className}>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
+      <body className={outfit.className} suppressHydrationWarning>
         <main className='bg-black text-gray-400'>
         <NavMenu/>
         {children}

@@ -2,8 +2,15 @@ import BookingForm from "@/components/BookingForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Melbourne Taxi Booking | Book a Taxi Online",
-  description: "Book a reliable Melbourne taxi online. Fast local pickups, airport transfers, and 24/7 taxi service across Melbourne.",
+  title: "Melbourne Taxi Booking | Book a Taxi Online - Vic Cabs",
+  description: "Book a reliable Melbourne taxi online with Vic Cabs. Fast local pickups, airport transfers, and 24/7 taxi service across Melbourne CBD and suburbs. Instant confirmation.",
+  keywords: [
+    'melbourne taxi booking',
+    'book taxi melbourne',
+    'melbourne taxi online',
+    'taxi booking melbourne',
+    'melbourne cab booking',
+  ],
   robots: {
     index: false,
     follow: false,

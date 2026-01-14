@@ -2,8 +2,15 @@ import BookingForm from "@/components/BookingForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Melbourne Airport Taxi | Book Airport Transfer",
-  description: "Book a Melbourne airport taxi online. Reliable airport pickups and drop-offs with instant booking confirmation.",
+  title: "Melbourne Airport Taxi | Book Airport Transfer - Vic Cabs",
+  description: "Book a Melbourne airport taxi online with Vic Cabs. Reliable airport pickups and drop-offs to Tullamarine with instant booking confirmation. 24/7 service, flight tracking, fixed rates.",
+  keywords: [
+    'melbourne airport taxi',
+    'airport transfer melbourne',
+    'tullamarine airport taxi',
+    'book airport taxi',
+    'melbourne airport transfer',
+  ],
   robots: {
     index: false,
     follow: false,

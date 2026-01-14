@@ -1,19 +1,61 @@
 'use client'
 import { useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { type BookingInput, bookingSchema } from '@/models/Booking'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { sendEmail, sendBookingWhatsApp } from '@/lib/_actions'
 import { toast } from 'sonner'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Calendar } from '@/components/ui/calendar'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { TimePicker } from '@/components/ui/time-picker'
+import { format } from 'date-fns'
+import { CalendarIcon, Clock } from 'lucide-react'
+import { cn } from '@/lib/utils'
+
+const serviceTypeOptions = [
+  { value: 'sedan', label: 'Sedan' },
+  { value: 'suv-5', label: 'SUV (5 Seater)' },
+  { value: 'suv-7', label: 'SUV (7 Seater)' },
+  { value: 'taxi-van-10', label: 'Taxi Van (10 Seater)' },
+  { value: 'wheelchair-van', label: 'Wheelchair Accessible Van' },
+  { value: 'parcel-delivery', label: 'Parcel Delivery' },
+]
 
 function BookingForm() {
   const [data, setData] = useState<BookingInput>()
+  const [selectedDate, setSelectedDate] = useState<Date>()
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
+  const [isTimePickerOpen, setIsTimePickerOpen] = useState(false)
 
-  const { register, handleSubmit, watch, formState:{ errors, isSubmitting}, reset,} = useForm<BookingInput>({defaultValues: {
-    people: 1,
-      
-  },
-  resolver: zodResolver(bookingSchema)})
+  const { 
+    register, 
+    handleSubmit, 
+    watch, 
+    setValue,
+    control,
+    formState: { errors, isSubmitting }, 
+    reset 
+  } = useForm<BookingInput>({
+    defaultValues: {
+      serviceType: 'sedan',
+    },
+    resolver: zodResolver(bookingSchema)
+  })
 
   const onSubmit: SubmitHandler<BookingInput> = async (data) => {
     try {
@@ -45,51 +87,241 @@ function BookingForm() {
   }
 
   return (
-    <div className='flex flex-col py-4 mb-4 w-full px-4 md:w-4/5 lg:w-3/5 mx-auto'>
-      <div className='mt-2 w-full md:w-3/4 md:mx-auto'>
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-y-3 md:gap-y-2'>
+    <div className='flex flex-col py-4 mb-4 w-full px-4 mx-auto overflow-visible'>
+      <div className='mt-2 w-full mx-auto overflow-visible'>
+        <form onSubmit={handleSubmit(onSubmit)} className='space-y-6 overflow-visible'>
+          {/* Two-column grid for form fields */}
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 overflow-visible'>
+            {/* Name Field */}
+            <div className='space-y-2'>
+              <Label htmlFor='name' className='text-base md:text-lg font-medium text-gray-300'>
+                Name <span className='text-red-500'>*</span>
+              </Label>
+              <Input 
+                type='text' 
+                id='name' 
+                {...register('name')} 
+                placeholder='Enter your full name' 
+                className='bg-white text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500'
+              />
+              {errors.name && (
+                <p className='text-red-500 text-sm mt-1'>{errors.name.message}</p>
+              )}
+            </div>
 
-          <label htmlFor='name' className='text-base font-medium mb-1 mt-2 md:text-lg lg:text-2xl'>Name</label>
-          <input type='text' id='name' {...register('name')} placeholder='Name' className='px-4 py-3 rounded text-base md:py-2' />
-          {errors.name && <span className='text-red-500 text-sm'>{errors.name.message}</span>}
+            {/* Email Field */}
+            <div className='space-y-2'>
+              <Label htmlFor='email' className='text-base md:text-lg font-medium text-gray-300'>
+                Email <span className='text-red-500'>*</span>
+              </Label>
+              <Input 
+                type='email' 
+                id='email' 
+                {...register('email')} 
+                placeholder='your.email@example.com' 
+                className='bg-white text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500'
+              />
+              {errors.email && (
+                <p className='text-red-500 text-sm mt-1'>{errors.email.message}</p>
+              )}
+            </div>
 
-          <label htmlFor='email' className='text-base font-medium mb-1 mt-2 md:text-lg lg:text-2xl'>Email</label>
-          <input type='email' id='email' {...register('email')} placeholder='Email address' className='px-4 py-3 rounded text-base md:py-2'/>
-          {errors.email && <span className='text-red-500 text-sm'>{errors.email.message}</span>}
+            {/* Phone Field */}
+            <div className='space-y-2'>
+              <Label htmlFor='phone' className='text-base md:text-lg font-medium text-gray-300'>
+                Phone <span className='text-red-500'>*</span>
+              </Label>
+              <Input 
+                type='tel' 
+                id='phone' 
+                {...register('phone')} 
+                placeholder='0412345678' 
+                className='bg-white text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500'
+              />
+              {errors.phone && (
+                <p className='text-red-500 text-sm mt-1'>{errors.phone.message}</p>
+              )}
+            </div>
 
-          <label htmlFor='phone' className='text-base font-medium mb-1 mt-2 md:text-lg lg:text-2xl'>Phone</label>
-          <input type='text' id='phone' {...register('phone')} placeholder='Phone number' className='px-4 py-3 rounded text-base md:py-2'/>
-          {errors.phone && <span className='text-red-500 text-sm'>{errors.phone.message}</span>}
+            {/* Service Type Field */}
+            <div className='space-y-2'>
+              <Label htmlFor='serviceType' className='text-base md:text-lg font-medium text-gray-300'>
+                Service Type <span className='text-red-500'>*</span>
+              </Label>
+              <Select 
+                defaultValue='sedan'
+                onValueChange={(value) => setValue('serviceType', value as any)}
+              >
+                <SelectTrigger className='bg-white text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500'>
+                  <SelectValue placeholder='Select service type' />
+                </SelectTrigger>
+                <SelectContent>
+                  {serviceTypeOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {errors.serviceType && (
+                <p className='text-red-500 text-sm mt-1'>{errors.serviceType.message}</p>
+              )}
+            </div>
 
-          <label htmlFor='pickUpAddress' className='text-base font-medium mb-1 mt-2 md:text-lg lg:text-2xl'>Pickup Address</label>
-          <input type='text' id='pickUpAddress' {...register('pickUpAddress')} placeholder='Pickup Address' className='px-4 py-3 rounded text-base md:py-2'/>
-          {errors.pickUpAddress && <span className='text-red-500 text-sm'>{errors.pickUpAddress.message}</span>}
+            {/* Date Picker Field */}
+            <div className='space-y-2'>
+              <Label className='text-base md:text-lg font-medium text-gray-300'>
+                Date of Pickup <span className='text-red-500'>*</span>
+              </Label>
+              <Controller
+                control={control}
+                name='date'
+                render={({ field }) => (
+                  <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant='outline'
+                        className={cn(
+                          'w-full justify-start text-left font-normal bg-white text-black border-gray-300 hover:bg-gray-50',
+                          !field.value && 'text-gray-500'
+                        )}
+                      >
+                        <CalendarIcon className='mr-2 h-4 w-4' />
+                        {field.value ? (
+                          format(new Date(field.value), 'PPP')
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className='w-auto p-0' align='start'>
+                      <Calendar
+                        mode='single'
+                        selected={field.value ? new Date(field.value) : undefined}
+                        onSelect={(date) => {
+                          if (date) {
+                            field.onChange(format(date, 'yyyy-MM-dd'))
+                            setSelectedDate(date)
+                            setIsDatePickerOpen(false)
+                          }
+                        }}
+                        disabled={(date) =>
+                          date < new Date(new Date().setHours(0, 0, 0, 0))
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                )}
+              />
+              {errors.date && (
+                <p className='text-red-500 text-sm mt-1'>{errors.date.message}</p>
+              )}
+            </div>
 
-          <label htmlFor='dropOffAddress' className='text-base font-medium mb-1 mt-2 md:text-lg lg:text-2xl'>Dropoff Address</label>
-          <input type='text' id='dropOffAddress' {...register('dropOffAddress')} placeholder='Dropoff Address' className='px-4 py-3 rounded text-base md:py-2'/>
-          {errors.dropOffAddress && <span className='text-red-500 text-sm'>{errors.dropOffAddress.message}</span>}
+            {/* Time Picker Field */}
+            <div className='space-y-2'>
+              <Label className='text-base md:text-lg font-medium text-gray-300'>
+                Pickup Time <span className='text-red-500'>*</span>
+              </Label>
+              <Controller
+                control={control}
+                name='time'
+                render={({ field }) => (
+                  <Popover open={isTimePickerOpen} onOpenChange={setIsTimePickerOpen}>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant='outline'
+                        className={cn(
+                          'w-full justify-start text-left font-normal bg-white text-black border-gray-300 hover:bg-gray-50',
+                          !field.value && 'text-gray-500'
+                        )}
+                      >
+                        <Clock className='mr-2 h-4 w-4' />
+                        {field.value || 'Pick a time'}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className='w-auto p-0' align='start'>
+                      <TimePicker
+                        value={field.value}
+                        onChange={field.onChange}
+                        onComplete={() => setIsTimePickerOpen(false)}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                )}
+              />
+              {errors.time && (
+                <p className='text-red-500 text-sm mt-1'>{errors.time.message}</p>
+              )}
+            </div>
+          </div>
 
-          <label htmlFor='date' className='text-base font-medium mb-1 mt-2 md:text-lg lg:text-2xl'>Date of Pickup</label>
-          <input type='date' id='date' {...register('date')} placeholder='Date of pickup' className='px-4 py-3 rounded text-base md:py-2'/>
-          {errors.date && <span className='text-red-500 text-sm'>{errors.date.message}</span>}
+          {/* Full-width fields */}
+          <div className='space-y-6'>
+            {/* Pickup Address Field */}
+            <div className='space-y-2'>
+              <Label htmlFor='pickUpAddress' className='text-base md:text-lg font-medium text-gray-300'>
+                Pickup Address <span className='text-red-500'>*</span>
+              </Label>
+              <Input 
+                type='text' 
+                id='pickUpAddress' 
+                {...register('pickUpAddress')} 
+                placeholder='Enter pickup location' 
+                className='bg-white text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500'
+              />
+              {errors.pickUpAddress && (
+                <p className='text-red-500 text-sm mt-1'>{errors.pickUpAddress.message}</p>
+              )}
+            </div>
 
-          <label htmlFor='time' className='text-base font-medium mb-1 mt-2 md:text-lg lg:text-2xl'>Pickup Time</label>
-          <input type='time' id='time' {...register('time')} placeholder='Pickup time' className='px-4 py-3 rounded text-base md:py-2'/>
-          {errors.time && <span className='text-red-500 text-sm'>{errors.time.message}</span>}
+            {/* Dropoff Address Field */}
+            <div className='space-y-2'>
+              <Label htmlFor='dropOffAddress' className='text-base md:text-lg font-medium text-gray-300'>
+                Dropoff Address <span className='text-red-500'>*</span>
+              </Label>
+              <Input 
+                type='text' 
+                id='dropOffAddress' 
+                {...register('dropOffAddress')} 
+                placeholder='Enter destination' 
+                className='bg-white text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500'
+              />
+              {errors.dropOffAddress && (
+                <p className='text-red-500 text-sm mt-1'>{errors.dropOffAddress.message}</p>
+              )}
+            </div>
 
-          <label htmlFor='people' className='text-base font-medium mb-1 mt-2 md:text-lg lg:text-2xl'>People</label>
-          <input type='number' id='people' {...register('people', {valueAsNumber: true})} placeholder='Number of people' className='px-4 py-3 rounded text-base md:py-2'/>
-          {errors.people && <span className='text-red-500 text-sm'>{errors.people.message}</span>}
+            {/* Instruction Field */}
+            <div className='space-y-2'>
+              <Label htmlFor='instruction' className='text-base md:text-lg font-medium text-gray-300'>
+                Special Instructions
+              </Label>
+              <Textarea 
+                id='instruction' 
+                {...register('instruction')} 
+                placeholder='Any special requests or instructions...' 
+                className='bg-white text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 min-h-[100px]'
+              />
+              {errors.instruction && (
+                <p className='text-red-500 text-sm mt-1'>{errors.instruction.message}</p>
+              )}
+            </div>
+          </div>
 
-          <label htmlFor='instruction' className='text-base font-medium mb-1 mt-2 md:text-lg lg:text-2xl'>Instruction</label>
-          <textarea id='instruction' {...register('instruction')} placeholder='instruction' className='px-4 py-3 rounded mb-2 text-base md:py-2'/>
-          {errors.instruction && <span className='text-red-500 text-sm'>{errors.instruction.message}</span>}
-
-          <button type='submit' disabled={isSubmitting} className='rounded-lg border border-none bg-slate-600 py-3 px-6 font-medium text-white transition-colors hover:bg-slate-400/80 disabled:cursor-not-allowed disabled:opacity-50 w-full md:w-1/2 mx-auto min-h-[44px] mt-4'
-          >{isSubmitting ? 'Booking...' : 'Book Now'}</button>
+          {/* Submit Button */}
+          <div className='flex justify-center pt-4'>
+            <Button 
+              type='submit' 
+              disabled={isSubmitting} 
+              className='w-full md:w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+            >
+              {isSubmitting ? 'Booking...' : 'Book Now'}
+            </Button>
+          </div>
         </form>
       </div>
-
     </div>
   )
 }
