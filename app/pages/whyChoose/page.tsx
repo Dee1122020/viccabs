@@ -58,6 +58,7 @@ function WhyChoose() {
                             alt='Exquisite luxury car fleet Melbourne - Premium taxi vehicles'
                             width={800}
                             height={600}
+                            className="w-full h-auto"
                         />
                     </div>
 
@@ -88,6 +89,7 @@ function WhyChoose() {
                             alt='Professional taxi drivers Melbourne - Licensed chauffeurs'
                             width={800}
                             height={600}
+                            className="w-full h-auto"
                         />
                     </div>
 
@@ -118,6 +120,7 @@ function WhyChoose() {
                             alt='Tailored taxi experience Melbourne - Personalized service'
                             width={800}
                             height={600}
+                            className="w-full h-auto"
                         />
                     </div>
 
@@ -148,6 +151,7 @@ function WhyChoose() {
                             alt='Reliable taxi service Melbourne - Trusted transport'
                             width={800}
                             height={600}
+                            className="w-full h-auto"
                         />
                     </div>
 
@@ -178,6 +182,7 @@ function WhyChoose() {
                             alt='Melbourne airport transfer excellence - Reliable airport taxi'
                             width={800}
                             height={600}
+                            className="w-full h-auto"
                         />
                     </div>
 
@@ -208,6 +213,7 @@ function WhyChoose() {
                             alt='Family-friendly taxi Melbourne - 7 seater SUV service'
                             width={800}
                             height={600}
+                            className="w-full h-auto"
                         />
                     </div>
 

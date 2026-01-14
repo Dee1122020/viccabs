@@ -62,6 +62,7 @@ function Services() {
                   alt='Premium taxi service Melbourne - 24/7 taxi booking'
                   width={800}
                   height={600}
+                  className="w-full h-auto"
                 />
               </div>
             </div>
@@ -89,6 +90,7 @@ function Services() {
                   alt='Luxury chauffeur service Melbourne - Executive car service'
                   width={800}
                   height={600}
+                  className="w-full h-auto"
                 />
               </div>
             </div>
@@ -116,6 +118,7 @@ function Services() {
                   alt='Melbourne airport taxi - Airport transfer service Tullamarine'
                   width={800}
                   height={600}
+                  className="w-full h-auto"
                 />
               </div>
             </div>
@@ -143,6 +146,7 @@ function Services() {
                   alt='Family SUV taxi Melbourne - 7 seater taxi service'
                   width={800}
                   height={600}
+                  className="w-full h-auto"
                 />
               </div>
             </div>
@@ -170,6 +174,7 @@ function Services() {
                   alt='Package delivery service Melbourne - Reliable courier service'
                   width={800}
                   height={600}
+                  className="w-full h-auto"
                 />
               </div>
             </div>

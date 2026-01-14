@@ -72,6 +72,7 @@ function About() {
               alt='Luxury chauffeur car Melbourne - Premium taxi fleet'
               width={800}
               height={600}
+              className="w-full h-auto"
             />
             
           </div> 
@@ -101,6 +102,7 @@ function About() {
               alt='Professional chauffeur Melbourne - Licensed taxi driver'
               width={800}
               height={600}
+              className="w-full h-auto"
             />
           </div> 
         </div>
@@ -129,6 +131,7 @@ function About() {
               alt='Excellence in Melbourne taxi and chauffeur service'
               width={800}
               height={600}
+              className="w-full h-auto"
             />
           </div>
         </div> 

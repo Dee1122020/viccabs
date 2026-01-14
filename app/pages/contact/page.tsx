@@ -42,6 +42,7 @@ function Contact() {
             alt='Contact Vic Cabs Melbourne taxi service'
             width={800}
             height={600}
+            className="w-full h-auto"
           />
         </div>
         <div className='md:w-1/2 items-center md:p-7'>
