@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { type BookingInput, bookingSchema } from '@/models/Booking'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { sendEmail } from '@/lib/_actions'
+import { sendEmail, sendBookingWhatsApp } from '@/lib/_actions'
 import { toast } from 'sonner'
 
 function BookingForm() {
@@ -16,19 +16,31 @@ function BookingForm() {
   resolver: zodResolver(bookingSchema)})
 
   const onSubmit: SubmitHandler<BookingInput> = async (data) => {
-    const result = await sendEmail(data)
-
-    if (result?.success){
-      console.log({data: result.data})
-      toast.success('Booking request sent successfully!')
-      reset()  
-      return
-    }
-
-    if (result?.error){
-      console.log({error: result.error})
+    try {
+      const resultEmail = await sendEmail(data)
+      const resultWhatsApp = await sendBookingWhatsApp(data)
+  
+      if (resultEmail?.success && resultWhatsApp?.success){
+        console.log({data: resultEmail.data, whatsApp: resultWhatsApp.data})
+        toast.success('Booking request sent successfully!')
+        reset()  
+        return
+      }
+  
+      // Check for specific error cases
+      if (!resultEmail?.success) {
+        console.error('Email error:', resultEmail?.error || resultEmail?.errors)
+      }
+      
+      if (!resultWhatsApp?.success) {
+        console.error('WhatsApp error:', resultWhatsApp?.error)
+      }
+      
       toast.error('Something went wrong!')
-      return
+      
+    } catch (error) {
+      console.error('Unexpected error:', error)
+      toast.error('An unexpected error occurred!')
     }
   }
 

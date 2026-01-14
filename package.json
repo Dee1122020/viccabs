@@ -10,7 +10,7 @@
     "commit": "cz"
   },
   "dependencies": {
-    "@green-api/whatsapp-api-client": "^0.4.4",
+    "@green-api/whatsapp-api-client-js-v2": "^1.0.2",
     "@hookform/resolvers": "^3.3.4",
     "axios": "^1.13.2",
     "next": "14.0.4",
