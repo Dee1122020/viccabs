@@ -13,7 +13,10 @@ export const metadata: Metadata = {
 function page() {
   return (
     <div>
+      <h2 className='text-3xl font-semibold text-center mt-6 md:mt-8 py-2 md:text-4xl md:font-semibold md:mb-3 md:py-3'>Booking Form</h2>
+      <div className='mt-2 w-full md:w-3/4 md:mx-auto'>
         <BookingForm />
+      </div>
     </div>
   )
 }

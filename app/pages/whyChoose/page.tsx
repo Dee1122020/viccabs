@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'
-import luxuryCar2 from '../../../public/luxury car2.jpg'
+import luxuryCar2 from '../../../public/luxury-car2.jpg'
 import chauffeur3 from '../../../public/chauffeur3.jpg'
-import femaleDriver from '../../../public/female driver.jpg'
-import womanInTheCar from '../../../public/woman in the car.jpg'
-import airportTransfer2 from '../../../public/airport transfer2.jpg'
-import familyFriendly from '../../../public/family friendly.jpg'
+import femaleDriver from '../../../public/female-driver.jpg'
+import womanInTheCar from '../../../public/woman-in-the-car.jpg'
+import airportTransfer2 from '../../../public/airport-transfer2.jpg'
+import familyFriendly from '../../../public/family-friendly.jpg'
 
 export const metadata: Metadata = {
     title: 'Why Choose Us',

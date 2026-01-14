@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'
-import taxiService from '../../../public/taxiService.jpg'
+import taxiService from '../../../public/taxi-service.jpg'
 import chauffeur2 from '../../../public/chauffeur2.jpg'
-import airportTransfer from '../../../public/airport transfer.jpg'
-import SUV from '../../../public/SUV.jpg'
+import airportTransfer from '../../../public/airport-transfer.jpg'
+import SUV from '../../../public/suv.jpg'
 
 export const metadata: Metadata = {
   title: 'Services',

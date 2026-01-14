@@ -1,13 +1,33 @@
 "use client"
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 function NavMenu() {
     const [menuIcon, setMenuIcon] = useState(false)
+    const [isNavigating, setIsNavigating] = useState(false)
+    const router = useRouter()
+
+    useEffect(() => {
+      if (menuIcon) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'unset';
+      }
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }, [menuIcon]);
 
     const handleSmallScreenNavigation = () =>{
         setMenuIcon(!menuIcon)
+    }
+
+    const handleNavigation = (href: string) => {
+        setIsNavigating(true)
+        setMenuIcon(false)
+        router.push(href)
     }
 
   return (
@@ -15,7 +35,7 @@ function NavMenu() {
         <nav className='max-w-7xl mx-auto h-[68px] flex justify-between items-center p-4'>
 
             <div>
-                <Link href='/' onClick={handleSmallScreenNavigation}>
+                <Link href='/'>
                     <span className='font-bold text-3xl md:2xl capitalize cursor-pointer hover:opacity-60 px-4 md:px-0'>Vic Cabs</span>
                 </Link>
             </div>
@@ -45,37 +65,91 @@ function NavMenu() {
 
             </ul>
 
-            <div onClick={handleSmallScreenNavigation} className='flex md:hidden cursor-pointer hover:opacity-60'>
-                {menuIcon ? (<AiOutlineClose size = '25' className = 'text-gray-400' />) : (<AiOutlineMenu size = '25' className = 'text-gray-400' />)}
-            </div>
+            {!menuIcon && (
+                <div onClick={handleSmallScreenNavigation} className='flex md:hidden cursor-pointer hover:opacity-60'>
+                    <AiOutlineMenu size = '25' className = 'text-white' />
+                </div>
+            )}
 
-            <div className= {menuIcon ? 'md:hidden absolute top-[100px] right-0 bottom-0 left-0 flex justify-center items-center w-full h-screen bg-black ease-in duration-300' : 'md:hidden absolute top-[68px] right-0 left-[-100%] flex justify-center items-center w-full h-screen bg-black text-gray-400 text-center ease-in duration-300'}>
+            {menuIcon && (
+              <div 
+                onClick={handleSmallScreenNavigation}
+                className="md:hidden fixed inset-0 z-50 flex justify-center items-center w-full h-screen bg-black/95 backdrop-blur-sm ease-in duration-300"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile navigation menu"
+              >
+                {/* Close button - positioned at top right */}
+                <button
+                  onClick={handleSmallScreenNavigation}
+                  className="absolute top-6 right-6 z-[60] cursor-pointer hover:opacity-60 transition-opacity"
+                  aria-label="Close menu"
+                >
+                  <AiOutlineClose size={30} className='text-white' />
+                </button>
                 
-                <div className='w-full top-0'>
-                    <ul className='font-bold text-2xl capitalize text-center'>
+                <div className='w-full' onClick={(e) => e.stopPropagation()}>
+                    <ul className='font-bold text-2xl md:text-3xl capitalize text-center space-y-2'>
 
-                        <li onClick={handleSmallScreenNavigation} className='py-5 hover:opacity-60 cursor-pointer'>
-                            <Link href='/'>Home</Link>
+                        <li 
+                          onClick={() => handleNavigation('/')} 
+                          className='py-4 hover:opacity-60 cursor-pointer min-h-[60px] flex items-center justify-center transition-opacity'
+                        >
+                          <span className='w-full h-full flex items-center justify-center'>
+                            Home
+                            {isNavigating && <span className='ml-2 animate-pulse'>...</span>}
+                          </span>
                         </li>
-                        <li onClick={handleSmallScreenNavigation} className='py-5 hover:opacity-60 cursor-pointer'>
-                            <Link href='/pages/book'>Book</Link>
+                        <li 
+                          onClick={() => handleNavigation('/pages/book')} 
+                          className='py-4 hover:opacity-60 cursor-pointer min-h-[60px] flex items-center justify-center transition-opacity'
+                        >
+                          <span className='w-full h-full flex items-center justify-center'>
+                            Book
+                            {isNavigating && <span className='ml-2 animate-pulse'>...</span>}
+                          </span>
                         </li>
-                        <li onClick={handleSmallScreenNavigation} className='py-5 hover:opacity-60 cursor-pointer'>
-                            <Link href='/pages/about'>about us</Link>
+                        <li 
+                          onClick={() => handleNavigation('/pages/about')} 
+                          className='py-4 hover:opacity-60 cursor-pointer min-h-[60px] flex items-center justify-center transition-opacity'
+                        >
+                          <span className='w-full h-full flex items-center justify-center'>
+                            About Us
+                            {isNavigating && <span className='ml-2 animate-pulse'>...</span>}
+                          </span>
                         </li>
-                        <li onClick={handleSmallScreenNavigation} className='py-5 hover:opacity-60 cursor-pointer'>
-                            <Link href='/pages/services'>services</Link>
+                        <li 
+                          onClick={() => handleNavigation('/pages/services')} 
+                          className='py-4 hover:opacity-60 cursor-pointer min-h-[60px] flex items-center justify-center transition-opacity'
+                        >
+                          <span className='w-full h-full flex items-center justify-center'>
+                            Services
+                            {isNavigating && <span className='ml-2 animate-pulse'>...</span>}
+                          </span>
                         </li>
-                        <li onClick={handleSmallScreenNavigation} className='py-5 hover:opacity-60 cursor-pointer'>
-                            <Link href='/pages/whyChoose'>why Choose us</Link>
+                        <li 
+                          onClick={() => handleNavigation('/pages/whyChoose')} 
+                          className='py-4 hover:opacity-60 cursor-pointer min-h-[60px] flex items-center justify-center transition-opacity'
+                        >
+                          <span className='w-full h-full flex items-center justify-center'>
+                            Why Choose Us
+                            {isNavigating && <span className='ml-2 animate-pulse'>...</span>}
+                          </span>
                         </li>
-                        <li onClick={handleSmallScreenNavigation} className='py-5 hover:opacity-60 cursor-pointer'>
-                            <Link href='/pages/contact'>contact us</Link>
+                        <li 
+                          onClick={() => handleNavigation('/pages/contact')} 
+                          className='py-4 hover:opacity-60 cursor-pointer min-h-[60px] flex items-center justify-center transition-opacity'
+                        >
+                          <span className='w-full h-full flex items-center justify-center'>
+                            Contact Us
+                            {isNavigating && <span className='ml-2 animate-pulse'>...</span>}
+                          </span>
                         </li>
                     </ul>
                 </div>
 
-            </div>
+              </div>
+            )}
 
         </nav>
 
