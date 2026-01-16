@@ -74,6 +74,7 @@ function Contact() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-base md:text-lg">
           <div className="bg-gray-900 p-3 rounded">Melbourne CBD</div>
           <div className="bg-gray-900 p-3 rounded">South Yarra</div>
+          <div className="bg-gray-900 p-3 rounded">Dandenong</div>
           <div className="bg-gray-900 p-3 rounded">Brighton</div>
           <div className="bg-gray-900 p-3 rounded">Carlton</div>
           <div className="bg-gray-900 p-3 rounded">Fitzroy</div>
@@ -83,7 +84,6 @@ function Contact() {
           <div className="bg-gray-900 p-3 rounded">Port Melbourne</div>
           <div className="bg-gray-900 p-3 rounded">Tullamarine Airport</div>
           <div className="bg-gray-900 p-3 rounded">All Melbourne Suburbs</div>
-          <div className="bg-gray-900 p-3 rounded">Regional Victoria</div>
         </div>
       </section>
 
