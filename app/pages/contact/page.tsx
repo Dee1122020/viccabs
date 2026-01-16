@@ -1,3 +1,16 @@
+/**
+ * @file Contact page for Vic Cabs website
+ * @module app/pages/contact/page
+ * @author Vic Cabs
+ * @date 2026-01-16
+ * 
+ * @description Contact information page with business details, contact methods,
+ * and service area information. Optimized for local SEO with structured
+ * contact information and clear call-to-action elements.
+ * 
+ * @exports {React.Component} Contact - The contact page component
+ */
+
 import { Metadata } from 'next'
 import Link from 'next/link'
 import React from 'react'

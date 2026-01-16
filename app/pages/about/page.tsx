@@ -1,3 +1,16 @@
+/**
+ * @file About page for Vic Cabs website
+ * @module app/pages/about/page
+ * @author Vic Cabs
+ * @date 2026-01-17
+ * 
+ * @description Company information page showcasing history, values,
+ * fleet details, and driver qualifications. Optimized for SEO with
+ * comprehensive business information.
+ * 
+ * @exports {React.Component} About - The about page component
+ */
+
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'

@@ -1,3 +1,16 @@
+/**
+ * @file Booking page for Vic Cabs website
+ * @module app/pages/book/page
+ * @author Vic Cabs
+ * @date 2026-01-17
+ * 
+ * @description Main booking page with comprehensive booking form.
+ * Includes service information, pricing details, and the booking form.
+ * Optimized for conversion with clear call-to-action elements.
+ * 
+ * @exports {React.Component} BookPage - The booking page component
+ */
+
 import BookingForm from '@/components/BookingForm'
 import { Metadata } from 'next'
 import React from 'react'

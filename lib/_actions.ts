@@ -1,10 +1,46 @@
+/**
+ * @file Server actions for booking form processing
+ * @module lib/_actions
+ * @author Vic Cabs
+ * @date 2026-01-16
+ * 
+ * @description Server-side functions for handling booking form submissions.
+ * Includes validation, email notifications via Resend, and WhatsApp notifications.
+ * These functions run on the server for security and API key protection.
+ * 
+ * @exports {Function} formEntry - Form validation function
+ * @exports {Function} sendEmail - Email notification function
+ * @exports {Function} sendBookingWhatsApp - WhatsApp notification function
+ */
+
 'use server'
+
 import { z } from "zod"
 import { BookingInput, bookingSchema } from "@/models/Booking"
 import { Resend } from "resend"
 import BookingEmail from "@/email/BookingEmail"
 import axios from 'axios'
 
+/**
+ * Validates booking form data using Zod schema
+ * 
+ * @async
+ * @function formEntry
+ * @param {BookingInput} data - Raw booking form data
+ * @returns {Promise<Object>} Validation result object
+ * 
+ * @description Server-side validation of booking data.
+ * Returns structured success/error responses for client-side handling.
+ * 
+ * @example
+ * // Client-side usage
+ * const result = await formEntry(formData);
+ * if (result.success) {
+ *   // Proceed with booking
+ * } else {
+ *   // Display validation errors
+ * }
+ */
 export async function formEntry(data: BookingInput){
     const result = bookingSchema.safeParse(data)
 
@@ -17,9 +53,28 @@ export async function formEntry(data: BookingInput){
     }
 }
 
+/**
+ * Resend email client initialization
+ * Uses API key from environment variables for secure email sending
+ */
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 // WhatsApp Helper Functions
+
+/**
+ * Formats Australian phone numbers for WhatsApp API
+ * 
+ * @function formatAustralianPhone
+ * @param {string} phoneNumber - Raw phone number input
+ * @returns {string} Formatted international phone number
+ * 
+ * @description Converts various Australian phone formats to international format:
+ * - 04xx xxx xxx → 61xxxxxxxxx
+ * - +61 xxxx xxxx → 61xxxxxxxxx
+ * - 61 xxxx xxxx → 61xxxxxxxxx (already formatted)
+ * 
+ * Removes all non-digit characters before formatting.
+ */
 function formatAustralianPhone(phoneNumber: string): string {
   // Remove all non-digit characters
   let digits = phoneNumber.replace(/\D/g, '');
@@ -40,6 +95,16 @@ function formatAustralianPhone(phoneNumber: string): string {
   return digits;
 }
 
+/**
+ * Converts service type codes to human-readable labels
+ * 
+ * @function getServiceTypeLabel
+ * @param {string} serviceType - Service type code from booking form
+ * @returns {string} Human-readable service type label
+ * 
+ * @description Maps internal service type codes to display-friendly labels
+ * for use in notifications and user interfaces.
+ */
 function getServiceTypeLabel(serviceType: string): string {
   const labels: Record<string, string> = {
     'sedan': 'Sedan',
@@ -52,6 +117,17 @@ function getServiceTypeLabel(serviceType: string): string {
   return labels[serviceType] || serviceType
 }
 
+/**
+ * Formats booking data into a structured WhatsApp message
+ * 
+ * @function formatBookingMessage
+ * @param {BookingInput} booking - Validated booking data
+ * @returns {string} Formatted WhatsApp message with emojis and structure
+ * 
+ * @description Creates a well-structured message for WhatsApp notifications
+ * with clear sections for customer details, trip information, and timestamps.
+ * Uses emojis for visual clarity and Australian date/time formatting.
+ */
 function formatBookingMessage(booking: BookingInput): string {
   return `🚖 *NEW CAB BOOKING* 🚖
 
@@ -73,6 +149,21 @@ function formatBookingMessage(booking: BookingInput): string {
 ⏰ Submitted: ${new Date().toLocaleString('en-AU')}`;
 }
 
+/**
+ * Sends a WhatsApp message using Green API
+ * 
+ * @async
+ * @function sendWhatsAppMessage
+ * @param {string} phoneNumber - Recipient phone number
+ * @param {string} message - Message content to send
+ * @returns {Promise<{success: boolean, messageId?: string}>} Send result
+ * 
+ * @description Internal function that handles the actual WhatsApp API call.
+ * Formats phone numbers, constructs API URL from environment variables,
+ * and handles API responses and errors.
+ * 
+ * @throws {Error} Logs API errors but returns failure object instead of throwing
+ */
 async function sendWhatsAppMessage(
   phoneNumber: string, 
   message: string
@@ -101,6 +192,23 @@ async function sendWhatsAppMessage(
   }
 }
 
+/**
+ * Sends WhatsApp notifications for new bookings to configured recipients
+ * 
+ * @async
+ * @function sendBookingWhatsApp
+ * @param {BookingInput} booking - Validated booking data
+ * @returns {Promise<{success: boolean, data?: any, error?: string}>} Send result
+ * 
+ * @description Main WhatsApp notification function that:
+ * 1. Reads recipients from environment variable (comma-separated)
+ * 2. Formats booking data into WhatsApp message
+ * 3. Sends to all recipients sequentially
+ * 4. Tracks success/failure counts
+ * 5. Returns appropriate result based on delivery outcomes
+ * 
+ * Environment variable: WHATSAPP_RECIPIENTS (comma-separated phone numbers)
+ */
 export async function sendBookingWhatsApp(booking: BookingInput): Promise<{ success: boolean; data?: any; error?: string }> {
   
   const recipients = process.env.WHATSAPP_RECIPIENTS?.split(',').map(r => r.trim()) || [];
@@ -135,6 +243,22 @@ export async function sendBookingWhatsApp(booking: BookingInput): Promise<{ succ
   return { success: false, error: 'No recipients configured' };
 }
 
+/**
+ * Sends email notification for new bookings using Resend
+ * 
+ * @async
+ * @function sendEmail
+ * @param {BookingInput} data - Booking form data
+ * @returns {Promise<{success: boolean, data?: any, error?: any, errors?: any}>} Send result
+ * 
+ * @description Email notification function that:
+ * 1. Validates booking data (server-side safety check)
+ * 2. Sends email via Resend with both plain text and React email template
+ * 3. Includes reply-to address for customer follow-up
+ * 4. Handles errors gracefully with detailed error information
+ * 
+ * Uses React email component for rich HTML email and fallback text version.
+ */
 export async function sendEmail(data: BookingInput) {
 
     const result = bookingSchema.safeParse(data)

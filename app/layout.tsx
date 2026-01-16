@@ -1,3 +1,17 @@
+/**
+ * @file Root layout component for the Vic Cabs application
+ * @module app/layout
+ * @author Vic Cabs
+ * @date 2026-01-16
+ * 
+ * @description Defines the root layout structure including metadata, SEO configuration,
+ * structured data for local business schema, and global components.
+ * This layout wraps all pages in the application and provides consistent
+ * header/footer navigation, analytics, and global styles.
+ * 
+ * @exports {React.Component} RootLayout - The root layout component
+ */
+
 import type { Metadata } from 'next'
 import { Outfit } from 'next/font/google'
 import Script from 'next/script'
@@ -5,8 +19,27 @@ import './globals.css'
 import Footer from '@/components/Footer'
 import NavMenu from '@/components/NavMenu'
 
+/**
+ * Google Font configuration using Outfit font family
+ * Optimized with next/font for performance and automatic font optimization
+ */
 const outfit = Outfit({ subsets: ['latin'] })
 
+/**
+ * SEO Metadata configuration for the Vic Cabs website
+ * 
+ * @constant {Metadata}
+ * @description Comprehensive SEO configuration including:
+ * - Title templates and defaults
+ * - Search engine optimization keywords
+ * - Open Graph and Twitter card metadata
+ * - Structured data for local business schema
+ * - Canonical URLs and language alternates
+ * - Search engine verification codes
+ * 
+ * This metadata is used by search engines and social media platforms
+ * to properly index and display the website content.
+ */
 export const metadata: Metadata = {
   metadataBase: new URL('https://viccabs.com.au'),
   title: {
@@ -83,11 +116,42 @@ export const metadata: Metadata = {
   },
 }
 
+/**
+ * RootLayout - Main layout component that wraps all pages
+ * 
+ * @component
+ * @param {Object} props - Component properties
+ * @param {React.ReactNode} props.children - Child components to render within layout
+ * @returns {JSX.Element} The root layout structure
+ * 
+ * @description Provides the foundational layout structure including:
+ * - HTML document structure with language attribute
+ * - Structured data for local business schema (JSON-LD)
+ * - Google Analytics integration
+ * - Global navigation and footer components
+ * - Consistent styling and theming
+ * 
+ * @example
+ * // Usage in Next.js App Router
+ * export default function Page() {
+ *   return (
+ *     <div>Page content</div>
+ *   )
+ * }
+ */
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  /**
+   * Structured data for local business schema (JSON-LD)
+   * Used by search engines to understand business information
+   * and display rich results in search listings
+   * 
+   * @constant {Object}
+   * @see https://schema.org/LocalBusiness
+   */
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -187,12 +251,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* 
+          Structured data injection for search engine optimization
+          Provides local business information to search engines
+        */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
       <body className={outfit.className} suppressHydrationWarning>
+        {/* 
+          Google Analytics integration
+          Loads analytics script after interactive for performance
+          Tracks page views and user interactions
+        */}
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-03ZMZ4KC9Y"
@@ -205,10 +278,15 @@ export default function RootLayout({
             gtag('config', 'G-03ZMZ4KC9Y');
           `}
         </Script>
+        
+        {/* 
+          Main content container with consistent styling
+          Includes global navigation, page content, and footer
+        */}
         <main className='bg-black text-gray-400'>
-        <NavMenu/>
-        {children}
-        <Footer/>
+          <NavMenu/>
+          {children}
+          <Footer/>
         </main>
       </body>
     </html>

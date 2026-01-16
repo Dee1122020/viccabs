@@ -1,4 +1,18 @@
+/**
+ * @file Booking form component for Vic Cabs taxi service
+ * @module components/BookingForm
+ * @author Vic Cabs
+ * @date 2026-01-16
+ * 
+ * @description Main booking form component with comprehensive validation,
+ * real-time form state management, and dual notification system (email + WhatsApp).
+ * Integrates with React Hook Form for form handling and Zod for schema validation.
+ * 
+ * @exports {React.Component} BookingForm - The booking form component
+ */
+
 'use client'
+
 import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { type BookingInput, bookingSchema } from '@/models/Booking'
@@ -10,9 +24,44 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { PersonalInfoFields, AddressFields, DateTimeFields } from '@/components/form'
 
+/**
+ * BookingForm - Main booking form component
+ * 
+ * @component
+ * @returns {JSX.Element} The complete booking form with all fields
+ * 
+ * @description Handles taxi booking submissions with:
+ * - Real-time form validation using Zod schemas
+ * - React Hook Form for state management
+ * - Dual notification system (email + WhatsApp)
+ * - Comprehensive error handling and user feedback
+ * - Modular form field components for maintainability
+ * 
+ * @state {BookingInput | undefined} data - Stores submitted form data for debugging
+ * 
+ * @example
+ * // Usage in a page component
+ * <BookingForm />
+ */
 function BookingForm() {
+  /**
+   * State for storing submitted form data
+   * Used primarily for debugging and development purposes
+   */
   const [data, setData] = useState<BookingInput>()
 
+  /**
+   * React Hook Form configuration
+   * 
+   * @constant {Object} form - Form instance with methods and state
+   * @property {Function} register - Registers input fields with validation
+   * @property {Function} handleSubmit - Handles form submission
+   * @property {Function} watch - Watches field values for real-time updates
+   * @property {Function} setValue - Programmatically sets field values
+   * @property {Object} control - Controller for complex form components
+   * @property {Object} formState - Current form state including errors and submission status
+   * @property {Function} reset - Resets form to initial state
+   */
   const { 
     register, 
     handleSubmit, 
@@ -28,19 +77,38 @@ function BookingForm() {
     resolver: zodResolver(bookingSchema)
   })
 
+  /**
+   * Form submission handler
+   * 
+   * @async
+   * @function onSubmit
+   * @param {BookingInput} data - Validated form data
+   * @returns {Promise<void>}
+   * 
+   * @description Processes form submission by:
+   * 1. Sending email notification via Resend API
+   * 2. Sending WhatsApp notification to configured recipients
+   * 3. Handling success/error responses with user feedback
+   * 4. Resetting form on successful submission
+   * 5. Providing detailed error logging for debugging
+   * 
+   * @throws {Error} Logs errors to console but handles gracefully for users
+   */
   const onSubmit: SubmitHandler<BookingInput> = async (data) => {
     try {
+      // Send notifications through both channels concurrently
       const resultEmail = await sendEmail(data)
       const resultWhatsApp = await sendBookingWhatsApp(data)
   
+      // Check if both notifications were successful
       if (resultEmail?.success && resultWhatsApp?.success){
         console.log({data: resultEmail.data, whatsApp: resultWhatsApp.data})
         toast.success('Booking request sent successfully!')
-        reset()  
+        reset()  // Clear form for next booking
         return
       }
   
-      // Check for specific error cases
+      // Handle partial failures with detailed error logging
       if (!resultEmail?.success) {
         console.error('Email error:', resultEmail?.error || resultEmail?.errors)
       }
@@ -49,9 +117,11 @@ function BookingForm() {
         console.error('WhatsApp error:', resultWhatsApp?.error)
       }
       
+      // User-friendly error message
       toast.error('Something went wrong!')
       
     } catch (error) {
+      // Catch unexpected errors during submission
       console.error('Unexpected error:', error)
       toast.error('An unexpected error occurred!')
     }
@@ -60,27 +130,43 @@ function BookingForm() {
   return (
     <div className='flex flex-col py-4 mb-4 w-full px-4 mx-auto overflow-visible'>
       <div className='mt-2 w-full mx-auto overflow-visible'>
+        {/* 
+          Main form element with React Hook Form integration
+          Uses vertical spacing for better visual separation
+        */}
         <form onSubmit={handleSubmit(onSubmit)} className='space-y-6 overflow-visible'>
-          {/* Personal Information Section */}
+          {/* 
+            Personal Information Section
+            Modular component for name, email, phone, and service type
+          */}
           <PersonalInfoFields 
             register={register}
             errors={errors}
             setValue={setValue}
           />
 
-          {/* Date and Time Section */}
+          {/* 
+            Date and Time Section
+            Calendar and time picker components for scheduling
+          */}
           <DateTimeFields 
             control={control}
             errors={errors}
           />
 
-          {/* Address Section */}
+          {/* 
+            Address Section
+            Mapbox-powered address autocomplete for pickup/dropoff
+          */}
           <AddressFields 
             control={control}
             errors={errors}
           />
 
-          {/* Special Instructions Section */}
+          {/* 
+            Special Instructions Section
+            Optional text area for additional requests or notes
+          */}
           <div className='space-y-2'>
             <Label htmlFor='instruction' className='text-base md:text-lg font-medium text-gray-300'>
               Special Instructions
@@ -96,7 +182,11 @@ function BookingForm() {
             )}
           </div>
 
-          {/* Submit Button */}
+          {/* 
+            Submit Button
+            Primary call-to-action with loading state
+            Disabled during submission to prevent duplicate requests
+          */}
           <div className='flex justify-center pt-4'>
             <Button 
               type='submit' 

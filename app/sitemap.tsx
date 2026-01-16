@@ -1,3 +1,15 @@
+/**
+ * @file Sitemap configuration for search engines
+ * @module app/sitemap
+ * @author Vic Cabs
+ * @date 2026-01-17
+ * 
+ * @description Defines XML sitemap for search engine optimization.
+ * Specifies URLs, change frequencies, and priority levels for all pages.
+ * 
+ * @exports {Function} sitemap - Sitemap configuration function
+ */
+
 import { MetadataRoute } from 'next'
  
 export default function sitemap(): MetadataRoute.Sitemap {
