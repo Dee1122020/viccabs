@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Outfit } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Footer from '@/components/Footer'
 import NavMenu from '@/components/NavMenu'
@@ -192,6 +193,18 @@ export default function RootLayout({
         />
       </head>
       <body className={outfit.className} suppressHydrationWarning>
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-03ZMZ4KC9Y"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-03ZMZ4KC9Y');
+          `}
+        </Script>
         <main className='bg-black text-gray-400'>
         <NavMenu/>
         {children}
