@@ -1,3 +1,15 @@
+/**
+ * @file Why Choose Us page for Vic Cabs website
+ * @module app/pages/whyChoose/page
+ * @author Vic Cabs
+ * @date 2026-01-17
+ * 
+ * @description Page highlighting company differentiators and value propositions.
+ * Showcases competitive advantages, driver qualifications, and service guarantees.
+ * 
+ * @exports {React.Component} WhyChoosePage - The why choose us page component
+ */
+
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'

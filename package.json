@@ -1,8 +1,9 @@
+
 {
   "name": "viccabs",
-  "version": "0.1.0",
-  "description": "Vic Cabs",
-  "author": "Vic Cabs",
+  "version": "1.0.0",
+  "description": "Vic Cabs - Premium Melbourne Taxi & Chauffeur Service",
+  "author": "Sarfaraj Shahjahan",
   "private": true,
   "scripts": {
     "dev": "next dev",

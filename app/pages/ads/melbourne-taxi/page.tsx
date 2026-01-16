@@ -1,3 +1,16 @@
+/**
+ * @file Melbourne taxi advertising/landing page
+ * @module app/pages/ads/melbourne-taxi/page
+ * @author Vic Cabs
+ * @date 2026-01-17
+ * 
+ * @description Specialized landing page for general Melbourne taxi services.
+ * Focused on converting visitors looking for taxi services in Melbourne.
+ * Includes booking form and service highlights.
+ * 
+ * @exports {React.Component} MelbourneTaxiPage - The Melbourne taxi page component
+ */
+
 import BookingForm from "@/components/BookingForm";
 import { Metadata } from "next";
 

@@ -1,3 +1,16 @@
+/**
+ * @file Airport transfer advertising/landing page
+ * @module app/pages/ads/airport-transfer/page
+ * @author Vic Cabs
+ * @date 2026-01-17
+ * 
+ * @description Specialized landing page for airport transfer services.
+ * Focused on converting visitors looking for Melbourne airport taxi services.
+ * Includes booking form and service highlights.
+ * 
+ * @exports {React.Component} AirportTransferPage - The airport transfer page component
+ */
+
 import BookingForm from "@/components/BookingForm";
 import { Metadata } from "next";
 

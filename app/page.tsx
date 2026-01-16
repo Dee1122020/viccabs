@@ -1,7 +1,30 @@
+/**
+ * @file Homepage component for Vic Cabs website
+ * @module app/page
+ * @author Vic Cabs
+ * @date 2026-01-16
+ * 
+ * @description Main landing page showcasing taxi and chauffeur services in Melbourne.
+ * Includes hero section, service overview, value propositions, coverage area,
+ * and call-to-action sections. Optimized for SEO with comprehensive metadata.
+ * 
+ * @exports {React.Component} Home - The homepage component
+ */
+
 import Link from "next/link"
 import Image from "next/image"
 import { Metadata } from "next"
 
+/**
+ * Page-specific SEO metadata for the homepage
+ * 
+ * @constant {Metadata}
+ * @description Optimized metadata for search engines and social sharing:
+ * - Targeted keywords for Melbourne taxi services
+ * - Canonical URL to prevent duplicate content issues
+ * - Open Graph tags for social media previews
+ * - Comprehensive service descriptions for better CTR
+ */
 export const metadata: Metadata = {
   title: 'Melbourne Taxi Service | Airport Transfer | Chauffeur Service',
   description: 'Premier Melbourne taxi service with 24/7 availability. Professional airport transfers, luxury chauffeur service, and reliable cab bookings. Book your Melbourne taxi online or call 0477 226 627 now.',
@@ -35,10 +58,29 @@ export const metadata: Metadata = {
   },
 }
 
+/**
+ * Home - Main homepage component
+ * 
+ * @component
+ * @returns {JSX.Element} The complete homepage with all sections
+ * 
+ * @description Organized into distinct sections for better user experience and SEO:
+ * 1. Hero Section - Primary value proposition and main call-to-action
+ * 2. Services Overview - Key service offerings with descriptions
+ * 3. Value Propositions - Reasons to choose Vic Cabs
+ * 4. Coverage Area - Service area information
+ * 5. Call-to-Action - Final booking encouragement
+ * 
+ * Each section uses semantic HTML5 elements for better accessibility and SEO.
+ */
 export default function Home() {
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-6">
-      {/* Hero Section */}
+      {/* 
+        Hero Section - Primary landing area
+        Features headline, value proposition, and main booking CTA
+        Uses responsive design with image-text layout
+      */}
       <section className="flex flex-col justify-center p-4 md:p-6 items-center gap-6 md:gap-8 mb-12 md:mb-16 lg:flex-row-reverse lg:items-start">
         <div className="w-full mt-4 md:w-1/2 lg:mt-8">
           <Image
@@ -78,7 +120,11 @@ export default function Home() {
         </article>
       </section>
 
-      {/* Services Overview Section */}
+      {/* 
+        Services Overview Section - Key service offerings
+        Grid layout showcasing different taxi and chauffeur services
+        Each card includes description and link to learn more
+      */}
       <section className="mb-12 md:mb-16 px-4 md:px-6">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-8 md:mb-12">
           Our Melbourne Taxi & Chauffeur Services
@@ -137,7 +183,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Section */}
+      {/* 
+        Why Choose Section - Value propositions and differentiators
+        Icon-based grid highlighting key benefits of choosing Vic Cabs
+        Includes link to detailed "Why Choose Us" page
+      */}
       <section className="mb-12 md:mb-16 px-4 md:px-6 bg-gray-900 py-10 md:py-12 rounded-lg">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-8">
           Why Choose Vic Cabs for Your Melbourne Transport
@@ -203,7 +253,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Coverage Area Section */}
+      {/* 
+        Coverage Area Section - Service area information
+        Describes geographical coverage and specialization areas
+        Important for local SEO and customer expectations
+      */}
       <section className="mb-12 md:mb-16 px-4 md:px-6">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-6">
           Melbourne Taxi Service Coverage
@@ -218,7 +272,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* 
+        Call-to-Action Section - Final booking encouragement
+        Prominent section with multiple action options
+        Uses contrasting design to draw attention
+      */}
       <section className="mb-12 md:mb-16 px-4 md:px-6 text-center bg-indigo-900 bg-opacity-20 py-10 md:py-12 rounded-lg border border-indigo-800">
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
           Ready to Book Your Melbourne Taxi?

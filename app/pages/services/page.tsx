@@ -1,3 +1,16 @@
+/**
+ * @file Services page for Vic Cabs website
+ * @module app/pages/services/page
+ * @author Vic Cabs
+ * @date 2026-01-17
+ * 
+ * @description Detailed services information page showcasing all
+ * taxi and chauffeur services offered. Includes service descriptions,
+ * pricing, and vehicle details.
+ * 
+ * @exports {React.Component} ServicesPage - The services page component
+ */
+
 import { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'

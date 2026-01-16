@@ -1,3 +1,16 @@
+/**
+ * @file Personal information form fields component
+ * @module components/form/PersonalInfoFields
+ * @author Vic Cabs
+ * @date 2026-01-17
+ * 
+ * @description Component for personal information section of booking form.
+ * Includes name, email, phone, and service type selection fields.
+ * Integrates with React Hook Form for validation and state management.
+ * 
+ * @exports {React.Component} PersonalInfoFields - Personal info fields component
+ */
+
 'use client'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -10,6 +23,10 @@ import {
 } from '@/components/ui/select'
 import { PersonalInfoFieldsProps } from './types'
 
+/**
+ * Service type options for dropdown selection
+ * Maps internal values to user-friendly labels
+ */
 const serviceTypeOptions = [
   { value: 'sedan', label: 'Sedan' },
   { value: 'suv-5', label: 'SUV (5 Seater)' },
@@ -19,6 +36,32 @@ const serviceTypeOptions = [
   { value: 'parcel-delivery', label: 'Parcel Delivery' },
 ]
 
+/**
+ * PersonalInfoFields - Component for personal information form section
+ * 
+ * @component
+ * @param {PersonalInfoFieldsProps} props - Component properties
+ * @param {UseFormRegister<BookingInput>} props.register - React Hook Form register function
+ * @param {FieldErrors<BookingInput>} props.errors - Form validation errors
+ * @param {UseFormSetValue<BookingInput>} props.setValue - Function to set form values
+ * @returns {JSX.Element} Personal information form fields
+ * 
+ * @description Renders the personal information section of the booking form:
+ * - Name field (required)
+ * - Email field (required, email validation)
+ * - Phone field (required, 10-digit Australian format)
+ * - Service type dropdown (required)
+ * 
+ * Uses responsive grid layout (1 column mobile, 2 columns desktop)
+ * Displays validation errors below each field
+ * 
+ * @example
+ * <PersonalInfoFields 
+ *   register={register}
+ *   errors={errors}
+ *   setValue={setValue}
+ * />
+ */
 export function PersonalInfoFields({ register, errors, setValue }: PersonalInfoFieldsProps) {
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6'>

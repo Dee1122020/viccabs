@@ -1,10 +1,63 @@
+/**
+ * @file Mapbox-powered address autocomplete component
+ * @module components/form/AddressAutocomplete
+ * @author Vic Cabs
+ * @date 2026-01-16
+ * 
+ * @description Interactive address input with real-time suggestions using Mapbox Search Box API.
+ * Features debounced search, click-outside detection, keyboard navigation, and
+ * full address retrieval for accurate location data.
+ * 
+ * @exports {React.Component} AddressAutocomplete - The autocomplete component
+ */
+
 'use client'
+
 import { useState, useEffect, useRef } from 'react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { MapPin, Loader2 } from 'lucide-react'
 import { AddressAutocompleteProps, SearchBoxSuggestion, SearchBoxSuggestResponse, SearchBoxRetrieveResponse } from './types'
 
+/**
+ * AddressAutocomplete - Interactive address input with Mapbox suggestions
+ * 
+ * @component
+ * @param {AddressAutocompleteProps} props - Component properties
+ * @param {string} props.value - Current input value
+ * @param {(value: string) => void} props.onChange - Callback when value changes
+ * @param {() => void} [props.onBlur] - Optional blur handler
+ * @param {string} props.label - Input label text
+ * @param {string} props.placeholder - Input placeholder text
+ * @param {string} [props.error] - Optional error message
+ * @param {string} props.id - HTML id attribute
+ * @returns {JSX.Element} The autocomplete component
+ * 
+ * @description Provides real-time address suggestions using Mapbox Search Box API:
+ * - Debounced search queries (300ms delay)
+ * - Click-outside detection to close suggestions
+ * - Keyboard navigation (Escape to close)
+ * - Full address retrieval on selection
+ * - Loading states and error handling
+ * - Responsive design with Tailwind CSS
+ * 
+ * @state {SearchBoxSuggestion[]} suggestions - Current address suggestions
+ * @state {boolean} isLoading - Loading state for API calls
+ * @state {boolean} showSuggestions - Whether to show suggestions dropdown
+ * @state {string} inputValue - Local input value (synced with props)
+ * @ref {React.RefObject<HTMLDivElement>} wrapperRef - Reference for click-outside detection
+ * @ref {React.MutableRefObject<NodeJS.Timeout>} debounceTimer - Timer for debounced search
+ * 
+ * @example
+ * <AddressAutocomplete
+ *   value={address}
+ *   onChange={setAddress}
+ *   label="Pickup Address"
+ *   placeholder="Enter pickup address..."
+ *   error={errors.pickUpAddress?.message}
+ *   id="pickup-address"
+ * />
+ */
 export function AddressAutocomplete({
   value,
   onChange,
@@ -21,7 +74,11 @@ export function AddressAutocomplete({
   const wrapperRef = useRef<HTMLDivElement>(null)
   const debounceTimer = useRef<NodeJS.Timeout>()
 
-  // Handle click outside to close suggestions
+  /**
+   * Click-outside detection to close suggestions dropdown
+   * Adds/removes event listener for mousedown events
+   * Closes suggestions when clicking outside the component
+   */
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
@@ -33,12 +90,33 @@ export function AddressAutocomplete({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Sync external value changes
+  /**
+   * Sync external value changes with local state
+   * Ensures input reflects current prop value
+   */
   useEffect(() => {
     setInputValue(value)
   }, [value])
 
-  // Debounced search function using Search Box API /suggest endpoint
+  /**
+   * Fetch address suggestions from Mapbox Search Box API
+   * 
+   * @async
+   * @function searchAddress
+   * @param {string} query - Search query (minimum 3 characters)
+   * @returns {Promise<void>}
+   * 
+   * @description Calls Mapbox Search Box API /suggest endpoint with:
+   * - Debounced queries (called from handleInputChange)
+   * - Australian location bias (proximity to Melbourne)
+   * - Address, POI, and place types
+   * - Limit of 5 suggestions
+   * - Error handling and loading states
+   * 
+   * Environment variables required:
+   * - NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
+   * - NEXT_PUBLIC_MAPBOX_SESSION_TOKEN
+   */
   const searchAddress = async (query: string) => {
     if (!query || query.length < 3) {
       setSuggestions([])
