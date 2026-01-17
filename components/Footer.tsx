@@ -23,7 +23,7 @@ function Footer() {
               </p>
             </section>
             <section>
-              <p className='text-sm md:text-base'>Phone: <Link href="tel:+61477226627">0477 226 627</Link></p>
+              <p className='text-sm md:text-base'>Phone: <Link href="tel:+61391148670">03 9114 8670</Link></p>
               {/*<p className='text-sm md:text-base'>Mobile: <Link href="tel:+61470445670">0470 445 670</Link></p>*/}
             </section>
             

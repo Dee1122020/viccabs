@@ -27,7 +27,7 @@ import { Metadata } from "next"
  */
 export const metadata: Metadata = {
   title: 'Melbourne Taxi Service | Airport Transfer | Chauffeur Service',
-  description: 'Premier Melbourne taxi service with 24/7 availability. Professional airport transfers, luxury chauffeur service, and reliable cab bookings. Book your Melbourne taxi online or call 0477 226 627 now.',
+  description: 'Premier Melbourne taxi service with 24/7 availability. Professional airport transfers, luxury chauffeur service, and reliable cab bookings. Book your Melbourne taxi online or call 03 9114 8670 now.',
   keywords: [
     'melbourne taxi',
     'melbourne taxi service',
@@ -114,7 +114,7 @@ export default function Home() {
               Book Your Ride Now
             </Link>
             <p className='mt-3 text-sm text-gray-400 normal-case'>
-              Or call us: <Link href="tel:+61477226627" className="text-indigo-400 hover:text-indigo-300 font-medium">0477 226 627</Link>
+              Or call us: <Link href="tel:+61391148670" className="text-indigo-400 hover:text-indigo-300 font-medium">03 9114 8670</Link>
             </p>
           </div>
         </article>

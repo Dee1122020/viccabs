@@ -62,7 +62,7 @@ function Services() {
                   Vic Cabs takes pride in offering a <strong>premium taxi service Melbourne</strong> that goes beyond the ordinary. Our fleet of meticulously maintained vehicles ensures a comfortable and stylish journey for every passenger, whether you're heading to a business meeting, exploring the city, or need late-night transportation.
                 </p>
                 <p className='text-xl font-medium md:text-2xl m-2 px-1 md:m-4 md:text-justify'>
-                  Our <strong>24/7 taxi service Melbourne</strong> offers convenient online booking through our website or instant phone booking at 0477 226 627. We provide transparent, competitive pricing with no hidden fees. All our taxis are equipped with modern GPS navigation, ensuring the most efficient routes through Melbourne's streets. Payment options include cash, credit/debit cards, and contactless payments for your convenience.
+                  Our <strong>24/7 taxi service Melbourne</strong> offers convenient online booking through our website or instant phone booking at 03 9114 8670. We provide transparent, competitive pricing with no hidden fees. All our taxis are equipped with modern GPS navigation, ensuring the most efficient routes through Melbourne's streets. Payment options include cash, credit/debit cards, and contactless payments for your convenience.
                 </p>
                 <p className='text-xl font-medium md:text-2xl m-2 px-1 md:m-4 md:text-justify'>
                   We cover all Melbourne suburbs including CBD, South Melbourne, Port Melbourne, St Kilda, Brighton, Carlton, Fitzroy, Richmond, South Yarra, Docklands, and beyond. Our <strong>reliable taxi Melbourne</strong> service guarantees prompt pickups, courteous drivers, and a comfortable ride every time. Perfect for daily commutes, shopping trips, medical appointments, or nights out.
@@ -177,7 +177,7 @@ function Services() {
                   Our <strong>package delivery Melbourne</strong> service provides same-day delivery options, real-time tracking, secure handling of your items, and proof of delivery documentation. We handle everything from small envelopes and documents to larger parcels and multiple packages. Our professional drivers treat every delivery with care, ensuring safe transport and timely arrival. Ideal for legal documents, business contracts, e-commerce packages, gifts, and urgent deliveries.
                 </p>
                 <p className='text-xl font-medium md:text-2xl m-2 px-1 md:m-4 md:text-justify'>
-                  Whether you need a one-time <strong>parcel delivery Melbourne</strong> or regular courier services for your business, Vic Cabs provides flexible solutions to meet your needs. We service all Melbourne suburbs including CBD, surrounding areas, and can arrange regional deliveries. Competitive rates for both individual and business accounts. Book your delivery online or call 0477 226 627 for immediate pickup and delivery service.
+                  Whether you need a one-time <strong>parcel delivery Melbourne</strong> or regular courier services for your business, Vic Cabs provides flexible solutions to meet your needs. We service all Melbourne suburbs including CBD, surrounding areas, and can arrange regional deliveries. Competitive rates for both individual and business accounts. Book your delivery online or call 03 9114 8670 for immediate pickup and delivery service.
                 </p>
               </div>
               <div className='w-5/6 md:w-3/4 p-3 md:p-6'>

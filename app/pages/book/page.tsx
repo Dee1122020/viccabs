@@ -17,7 +17,7 @@ import React from 'react'
 
 export const metadata: Metadata = {
   title: 'Book Melbourne Taxi Online - Instant Taxi Booking | Vic Cabs',
-  description: 'Book your Melbourne taxi online with Vic Cabs. Instant confirmation, 24/7 availability, airport transfers, luxury chauffeur service. Secure online booking or call 0477 226 627.',
+  description: 'Book your Melbourne taxi online with Vic Cabs. Instant confirmation, 24/7 availability, airport transfers, luxury chauffeur service. Secure online booking or call 03 9114 8670.',
   keywords: [
     'book melbourne taxi online',
     'instant taxi booking',
@@ -51,7 +51,7 @@ function page() {
           Welcome to Vic Cabs' easy <strong>online taxi booking Melbourne</strong> system. Complete the form below to instantly book your premium taxi or chauffeur service. Whether you need an <strong>airport transfer Melbourne</strong>, corporate chauffeur, or city transport, we've got you covered.
         </p>
         <p className="text-base md:text-lg text-gray-400 mb-6">
-          Or call us now for immediate bookings: <a href="tel:+61477226627" className="text-indigo-400 hover:text-indigo-300 font-semibold">0477 226 627</a>
+          Or call us now for immediate bookings: <a href="tel:+61391148670" className="text-indigo-400 hover:text-indigo-300 font-semibold">03 9114 8670</a>
         </p>
         <a 
           href="#booking-form"
