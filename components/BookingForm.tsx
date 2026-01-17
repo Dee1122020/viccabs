@@ -16,6 +16,7 @@
 import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import { format } from 'date-fns'
 import { type BookingInput, bookingSchema } from '@/models/Booking'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { sendEmail, sendBookingWhatsApp } from '@/lib/_actions'
@@ -74,6 +75,8 @@ function BookingForm() {
   } = useForm<BookingInput>({
     defaultValues: {
       serviceType: 'sedan',
+      date: format(new Date(), 'dd/MM/yyyy'),
+      time: format(new Date(), 'HH:mm')
     },
     resolver: zodResolver(bookingSchema)
   })

@@ -118,6 +118,112 @@ function getServiceTypeLabel(serviceType: string): string {
 }
 
 /**
+ * Formats date in Australian format (DD/MM/YYYY)
+ * 
+ * @function formatAustralianDate
+ * @param {string} dateStr - Date string to format
+ * @returns {string} Date formatted as DD/MM/YYYY
+ * 
+ * @description Converts date strings to Australian format.
+ * Handles various input formats and returns DD/MM/YYYY.
+ */
+function formatAustralianDate(dateStr: string): string {
+  if (!dateStr) return '';
+  
+  try {
+    // Try to parse the date
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) {
+      // If parsing fails, try to handle DD/MM/YYYY format
+      const parts = dateStr.split('/');
+      if (parts.length === 3) {
+        // Already in DD/MM/YYYY format
+        return dateStr;
+      }
+      return dateStr; // Return as-is if can't parse
+    }
+    
+    // Format as DD/MM/YYYY
+    return date.toLocaleDateString('en-AU', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }).replace(/\//g, '/');
+  } catch {
+    return dateStr; // Return as-is on error
+  }
+}
+
+/**
+ * Formats time in Australian 24-hour format (HH:mm)
+ * 
+ * @function formatAustralianTime
+ * @param {string} timeStr - Time string to format
+ * @returns {string} Time formatted as HH:mm
+ * 
+ * @description Ensures time is in 24-hour format (HH:mm).
+ * Handles various time formats and converts to HH:mm.
+ */
+function formatAustralianTime(timeStr: string): string {
+  if (!timeStr) return '';
+  
+  // If already in HH:mm format, return as-is
+  if (/^\d{2}:\d{2}$/.test(timeStr)) {
+    return timeStr;
+  }
+  
+  // Try to parse other formats
+  try {
+    const date = new Date(`2000-01-01T${timeStr}`);
+    if (!isNaN(date.getTime())) {
+      return date.toLocaleTimeString('en-AU', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+    }
+  } catch {
+    // Continue to fallback
+  }
+  
+  return timeStr; // Return as-is if can't parse
+}
+
+/**
+ * Normalizes Melbourne airport addresses for driver clarity
+ * 
+ * @function normalizeAirportAddress
+ * @param {string} address - Original address string
+ * @returns {string} Normalized address for driver clarity
+ * 
+ * @description Detects Melbourne airport addresses and converts them
+ * to a driver-friendly format. Specifically handles "Terminal, Melbourne 3045, Australia"
+ * pattern and converts to "Departure Terminal, Melbourne Airport, Tullamarine".
+ */
+function normalizeAirportAddress(address: string): string {
+  if (!address) return '';
+  
+  const lowerAddress = address.toLowerCase();
+  
+  // Check for Melbourne airport patterns
+  if (lowerAddress.includes('terminal') && 
+      (lowerAddress.includes('melbourne') || lowerAddress.includes('3045')) &&
+      lowerAddress.includes('australia')) {
+    return 'Departure Terminal, Melbourne Airport, Tullamarine';
+  }
+  
+  // Check for other airport variations
+  if (lowerAddress.includes('melbourne airport') || 
+      lowerAddress.includes('tullamarine airport')) {
+    // Ensure consistent formatting
+    return address.replace(/melbourne\s+airport/i, 'Melbourne Airport')
+                  .replace(/tullamarine\s+airport/i, 'Melbourne Airport, Tullamarine');
+  }
+  
+  return address; // Return original if not an airport address
+}
+
+/**
  * Formats booking data into a structured WhatsApp message
  * 
  * @function formatBookingMessage
@@ -129,18 +235,23 @@ function getServiceTypeLabel(serviceType: string): string {
  * Uses emojis for visual clarity and Australian date/time formatting.
  */
 function formatBookingMessage(booking: BookingInput): string {
+  const formattedDate = formatAustralianDate(booking.date);
+  const formattedTime = formatAustralianTime(booking.time);
+  const normalizedPickup = normalizeAirportAddress(booking.pickUpAddress);
+  const normalizedDropoff = normalizeAirportAddress(booking.dropOffAddress);
+  
   return `🚖 *NEW CAB BOOKING* 🚖
 
 *Customer Details:*
 👤 Name: ${booking.name}
 📞 Phone: ${booking.phone}
-📧 Email: ${booking.email}
+📧 Email: ${booking.email || 'Not provided'}
 
 *Trip Details:*
-📍 Pickup: ${booking.pickUpAddress}
-🎯 Dropoff: ${booking.dropOffAddress}
-📅 Date: ${booking.date}
-🕒 Time: ${booking.time}
+📍 Pickup: ${normalizedPickup}
+🎯 Dropoff: ${normalizedDropoff}
+📅 Date: ${formattedDate}
+🕒 Time: ${formattedTime}
 🚗 Service: ${getServiceTypeLabel(booking.serviceType)}
 
 📝 Requests: ${booking.instruction || 'None'}
@@ -267,14 +378,30 @@ export async function sendEmail(data: BookingInput) {
         const { name, email, phone, pickUpAddress, dropOffAddress, date, time, serviceType, instruction } = result.data
 
         try{
+            // Format dates and addresses for email
+            const formattedDate = formatAustralianDate(date || '');
+            const formattedTime = formatAustralianTime(time || '');
+            const normalizedPickup = normalizeAirportAddress(pickUpAddress);
+            const normalizedDropoff = normalizeAirportAddress(dropOffAddress);
+            
             const data = await resend.emails.send({
                 from: 'Vic Cabs <booking@viccabs.com.au>',
                 to: ['dee.taxis.au@gmail.com', 'admin@viccabs.com.au'],
                 //cc: 'dee.taxis.au@gmail.com',
                 reply_to: `${email}`,
                 subject: 'New Booking',
-                text: `Name: ${name} \n Email: ${email} \n Phone: ${phone} \n Pick Up Address: ${pickUpAddress} \n Drop Off Address: ${dropOffAddress} \n Date: ${date || ''} \n Time: ${time || ''} \n Service Type: ${getServiceTypeLabel(serviceType)} \n Instruction: ${instruction || ''}`,
-                react: BookingEmail({ name, email, phone, pickUpAddress, dropOffAddress, date: date || '', time: time || '', serviceType, instructions: instruction || '' })
+                text: `Name: ${name} \n Email: ${email || 'Not provided'} \n Phone: ${phone} \n Pick Up Address: ${normalizedPickup} \n Drop Off Address: ${normalizedDropoff} \n Date: ${formattedDate} \n Time: ${formattedTime} \n Service Type: ${getServiceTypeLabel(serviceType)} \n Instruction: ${instruction || ''}`,
+                react: BookingEmail({ 
+                  name, 
+                  email: email || 'Not provided', 
+                  phone, 
+                  pickUpAddress: normalizedPickup, 
+                  dropOffAddress: normalizedDropoff, 
+                  date: formattedDate, 
+                  time: formattedTime, 
+                  serviceType, 
+                  instructions: instruction || '' 
+                })
             })
             return { success: true, data }
         }

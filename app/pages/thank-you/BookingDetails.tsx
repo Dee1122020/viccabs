@@ -42,6 +42,16 @@ function BookingDetails() {
   const date = searchParams.get('date')
   const time = searchParams.get('time')
   
+  // Debug logging (commented out for production, uncomment for debugging)
+  // console.log('BookingDetails - Received time parameter:', {
+  //   rawTime: time,
+  //   type: typeof time,
+  //   isNull: time === null,
+  //   isEmpty: time === '',
+  //   length: time?.length,
+  //   value: time
+  // })
+  
   /**
    * Formats date string to readable format
    * 
@@ -73,24 +83,87 @@ function BookingDetails() {
    * @returns {string} Formatted time (e.g., "2:30 PM")
    */
   const formatTime = (timeStr: string | null): string => {
-    if (!timeStr) return 'Not specified'
+    // Debug logging (commented out for production, uncomment for debugging)
+    // console.log('formatTime: Input time string:', timeStr)
+    
+    if (!timeStr || timeStr.trim() === '') {
+      return 'Not specified'
+    }
+    
+    const trimmedTime = timeStr.trim()
     
     try {
-      // Handle both 24-hour and 12-hour formats
-      const [hours, minutes] = timeStr.split(':').map(Number)
+      // The time picker outputs format like "02:30 PM" (12-hour with leading zeros)
+      // Pattern: HH:MM AM/PM (where HH is 01-12)
+      const timePickerPattern = /^(\d{1,2}):(\d{2})\s*(AM|PM|am|pm)$/i
       
-      if (isNaN(hours) || isNaN(minutes)) return 'Invalid time'
+      // Also handle 24-hour format just in case
+      const twentyFourHourPattern = /^(\d{1,2}):(\d{2})(?::(\d{2}))?$/
       
+      let hours = 0
+      let minutes = 0
+      
+      // Try time picker format first (most likely)
+      const timePickerMatch = trimmedTime.match(timePickerPattern)
+      if (timePickerMatch) {
+        hours = parseInt(timePickerMatch[1], 10)
+        minutes = parseInt(timePickerMatch[2], 10)
+        const period = timePickerMatch[3]?.toUpperCase()
+        
+        // Convert 12-hour to 24-hour format for the Date object
+        // Time picker uses 12-hour format: 12 AM = 0, 12 PM = 12, 1-11 AM = 1-11, 1-11 PM = 13-23
+        if (period === 'PM') {
+          if (hours === 12) {
+            hours = 12 // 12 PM = 12
+          } else {
+            hours += 12 // 1-11 PM = 13-23
+          }
+        } else if (period === 'AM') {
+          if (hours === 12) {
+            hours = 0 // 12 AM = 0
+          }
+          // 1-11 AM stay as 1-11
+        }
+      } 
+      // Try 24-hour format as fallback
+      else {
+        const twentyFourMatch = trimmedTime.match(twentyFourHourPattern)
+        if (twentyFourMatch) {
+          hours = parseInt(twentyFourMatch[1], 10)
+          minutes = parseInt(twentyFourMatch[2], 10)
+        } else {
+          // Return the original time string if we can't parse it
+          return trimmedTime
+        }
+      }
+      
+      // Validate hours and minutes
+      if (isNaN(hours) || isNaN(minutes)) {
+        return 'Invalid time'
+      }
+      
+      // Hours should be 0-23 after conversion
+      if (hours < 0 || hours > 23) {
+        return 'Invalid hours'
+      }
+      
+      if (minutes < 0 || minutes > 59) {
+        return 'Invalid minutes'
+      }
+      
+      // Create date object and format
       const date = new Date()
-      date.setHours(hours, minutes)
+      date.setHours(hours, minutes, 0, 0) // Set seconds and milliseconds to 0
       
       return date.toLocaleTimeString('en-AU', {
         hour: 'numeric',
         minute: '2-digit',
         hour12: true
       })
-    } catch {
-      return 'Invalid time'
+      
+    } catch (error) {
+      // Return the original string if we can't parse it
+      return trimmedTime || 'Invalid time'
     }
   }
   
