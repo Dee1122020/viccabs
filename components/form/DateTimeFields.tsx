@@ -6,10 +6,26 @@ import { Label } from '@/components/ui/label'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { TimePicker } from '@/components/ui/time-picker'
-import { format } from 'date-fns'
+import { format, parse } from 'date-fns'
 import { CalendarIcon, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { DateTimeFieldsProps } from './types'
+
+/**
+ * Parses Australian date string (DD/MM/YYYY) to Date object
+ */
+function parseAustralianDate(dateStr: string): Date | undefined {
+  if (!dateStr) return undefined;
+  
+  try {
+    // Try to parse as DD/MM/YYYY
+    return parse(dateStr, 'dd/MM/yyyy', new Date());
+  } catch {
+    // Fallback to default Date parsing
+    const date = new Date(dateStr);
+    return isNaN(date.getTime()) ? undefined : date;
+  }
+}
 
 export function DateTimeFields({ control, errors }: DateTimeFieldsProps) {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
@@ -26,43 +42,47 @@ export function DateTimeFields({ control, errors }: DateTimeFieldsProps) {
         <Controller
           control={control}
           name='date'
-          render={({ field }) => (
-            <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant='outline'
-                  className={cn(
-                    'w-full justify-start text-left font-normal bg-white text-black border-gray-300 hover:bg-gray-50',
-                    !field.value && 'text-gray-500'
-                  )}
-                >
-                  <CalendarIcon className='mr-2 h-4 w-4' />
-                  {field.value ? (
-                    format(new Date(field.value), 'PPP')
-                  ) : (
-                    <span>Pick a date</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className='w-auto p-0' align='start'>
-                <Calendar
-                  mode='single'
-                  selected={field.value ? new Date(field.value) : undefined}
-                  onSelect={(date) => {
-                    if (date) {
-                      field.onChange(format(date, 'yyyy-MM-dd'))
-                      setSelectedDate(date)
-                      setIsDatePickerOpen(false)
+          render={({ field }) => {
+            const parsedDate = field.value ? parseAustralianDate(field.value) : undefined;
+            
+            return (
+              <Popover open={isDatePickerOpen} onOpenChange={setIsDatePickerOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant='outline'
+                    className={cn(
+                      'w-full justify-start text-left font-normal bg-white text-black border-gray-300 hover:bg-gray-50',
+                      !field.value && 'text-gray-500'
+                    )}
+                  >
+                    <CalendarIcon className='mr-2 h-4 w-4' />
+                    {parsedDate ? (
+                      format(parsedDate, 'PPP')
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className='w-auto p-0' align='start'>
+                  <Calendar
+                    mode='single'
+                    selected={parsedDate}
+                    onSelect={(date) => {
+                      if (date) {
+                        field.onChange(format(date, 'dd/MM/yyyy'))
+                        setSelectedDate(date)
+                        setIsDatePickerOpen(false)
+                      }
+                    }}
+                    disabled={(date) =>
+                      date < new Date(new Date().setHours(0, 0, 0, 0))
                     }
-                  }}
-                  disabled={(date) =>
-                    date < new Date(new Date().setHours(0, 0, 0, 0))
-                  }
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          )}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            );
+          }}
         />
         {errors.date && (
           <p className='text-red-500 text-sm mt-1'>{errors.date.message}</p>

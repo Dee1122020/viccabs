@@ -85,7 +85,7 @@ export function PersonalInfoFields({ register, errors, setValue }: PersonalInfoF
       {/* Email Field */}
       <div className='space-y-2'>
         <Label htmlFor='email' className='text-base md:text-lg font-medium text-gray-300'>
-          Email <span className='text-red-500'>*</span>
+          Email
         </Label>
         <Input
           type='email'
