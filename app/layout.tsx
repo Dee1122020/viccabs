@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     default: 'Vic Cabs | Premier Melbourne Taxi & Chauffeur Service',
     template: '%s | Vic Cabs'
   },
-  description: 'Premium taxi and chauffeur service in Melbourne. 24/7 airport transfers, luxury vehicles, professional drivers. Book your Melbourne taxi online or call 0477 226 627 for instant booking.',
+  description: 'Premium taxi and chauffeur service in Melbourne. 24/7 airport transfers, luxury vehicles, professional drivers. Book your Melbourne taxi online or call 03 9114 8670 for instant booking.',
   applicationName: 'Vic Cabs',
   keywords: [
     'melbourne taxi',
@@ -160,7 +160,7 @@ export default function RootLayout({
     alternateName: 'Victoria Cabs Melbourne',
     description: 'Premium taxi and chauffeur service in Melbourne offering 24/7 airport transfers, luxury vehicles, and professional drivers.',
     url: 'https://viccabs.com.au',
-    telephone: '+61477226627',
+    telephone: '+61391148670',
     priceRange: '$$',
     image: 'https://viccabs.com.au/flinders-street-station2.jpg',
     logo: 'https://viccabs.com.au/car.png',

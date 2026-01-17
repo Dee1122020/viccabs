@@ -18,7 +18,7 @@ import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Contact Vic Cabs - Book Melbourne Taxi & Chauffeur Service',
-  description: 'Contact Vic Cabs for premium Melbourne taxi and chauffeur bookings. Call 0477 226 627 for 24/7 service. Instant online booking available. Serving Melbourne CBD and all suburbs.',
+  description: 'Contact Vic Cabs for premium Melbourne taxi and chauffeur bookings. Call 03 9114 8670 for 24/7 service. Instant online booking available. Serving Melbourne CBD and all suburbs.',
   keywords: [
     'contact melbourne taxi',
     'book taxi melbourne phone',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Contact Vic Cabs - Book Melbourne Taxi & Chauffeur Service',
-    description: 'Contact Vic Cabs for premium Melbourne taxi and chauffeur bookings. Call 0477 226 627 for 24/7 service.',
+    description: 'Contact Vic Cabs for premium Melbourne taxi and chauffeur bookings. Call 03 9114 8670 for 24/7 service.',
     url: 'https://viccabs.com.au/pages/contact',
     type: 'website',
   },
@@ -65,7 +65,7 @@ function Contact() {
 
           <h3 className="text-2xl md:text-3xl mb-3 m-2 p-1 md:m-4 font-semibold">
              Call us 24/7:&nbsp;
-            <Link href="tel:+61477226627"><u className="text-indigo-400 hover:text-indigo-300">0477 226 627</u></Link>
+            <Link href="tel:+61391148670"><u className="text-indigo-400 hover:text-indigo-300">03 9114 8670</u></Link>
           </h3>
 
           <div className="text-lg md:text-xl m-2 px-1 md:m-4 space-y-2">
@@ -112,7 +112,7 @@ function Contact() {
               How do I book a taxi with Vic Cabs?
             </h4>
             <p className="text-base md:text-lg">
-              You can book a <strong>Melbourne taxi</strong> through our online booking form on the website, or call us directly at 0477 226 627 for immediate bookings. We offer instant confirmation for both methods.
+              You can book a <strong>Melbourne taxi</strong> through our online booking form on the website, or call us directly at 03 9114 8670 for immediate bookings. We offer instant confirmation for both methods.
             </p>
           </div>
 
@@ -197,10 +197,10 @@ function Contact() {
             Book Online Now
           </Link>
           <Link 
-            href="tel:+61477226627" 
+            href="tel:+61391148670" 
             className="inline-block bg-gray-700 hover:bg-gray-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
           >
-            Call 0477 226 627
+            Call 03 9114 8670
           </Link>
         </div>
       </section>

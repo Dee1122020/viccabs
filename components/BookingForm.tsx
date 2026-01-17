@@ -15,6 +15,7 @@
 
 import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 import { type BookingInput, bookingSchema } from '@/models/Booking'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { sendEmail, sendBookingWhatsApp } from '@/lib/_actions'
@@ -78,6 +79,11 @@ function BookingForm() {
   })
 
   /**
+   * Next.js router for client-side navigation
+   */
+  const router = useRouter()
+
+  /**
    * Form submission handler
    * 
    * @async
@@ -89,7 +95,7 @@ function BookingForm() {
    * 1. Sending email notification via Resend API
    * 2. Sending WhatsApp notification to configured recipients
    * 3. Handling success/error responses with user feedback
-   * 4. Resetting form on successful submission
+   * 4. Redirecting to thank you page on successful submission
    * 5. Providing detailed error logging for debugging
    * 
    * @throws {Error} Logs errors to console but handles gracefully for users
@@ -104,7 +110,16 @@ function BookingForm() {
       if (resultEmail?.success && resultWhatsApp?.success){
         console.log({data: resultEmail.data, whatsApp: resultWhatsApp.data})
         toast.success('Booking request sent successfully!')
-        reset()  // Clear form for next booking
+        
+        // Build URL parameters for thank you page
+        const params = new URLSearchParams({
+          name: data.name,
+          date: data.date || '',
+          time: data.time || ''
+        }).toString()
+        
+        // Redirect to thank you page with booking details
+        router.push(`/pages/thank-you?${params}`)
         return
       }
   
