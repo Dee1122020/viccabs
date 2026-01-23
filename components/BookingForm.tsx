@@ -76,7 +76,7 @@ function BookingForm() {
     defaultValues: {
       serviceType: 'sedan',
       date: format(new Date(), 'dd/MM/yyyy'),
-      time: format(new Date(), 'HH:mm')
+      time: format(new Date(), 'hh:mm a') // 12-hour format with AM/PM
     },
     resolver: zodResolver(bookingSchema)
   })
@@ -95,23 +95,44 @@ function BookingForm() {
    * @returns {Promise<void>}
    * 
    * @description Processes form submission by:
-   * 1. Sending email notification via Resend API
-   * 2. Sending WhatsApp notification to configured recipients
-   * 3. Handling success/error responses with user feedback
+   * 1. Sending email and WhatsApp notifications in parallel (for speed)
+   * 2. Using Promise.allSettled for graceful failure handling
+   * 3. Succeeding if at least one notification works
    * 4. Redirecting to thank you page on successful submission
    * 5. Providing detailed error logging for debugging
    * 
    * @throws {Error} Logs errors to console but handles gracefully for users
    */
   const onSubmit: SubmitHandler<BookingInput> = async (data) => {
+    const submitStartTime = Date.now();
+    
     try {
-      // Send notifications through both channels concurrently
-      const resultEmail = await sendEmail(data)
-      const resultWhatsApp = await sendBookingWhatsApp(data)
+      console.log('⏱️ Starting booking submission...');
+      
+      // Send notifications through both channels in parallel with Promise.allSettled
+      // This ensures one failure doesn't block the other, and both complete faster
+      const [resultEmail, resultWhatsApp] = await Promise.allSettled([
+        sendEmail(data),
+        sendBookingWhatsApp(data)
+      ]);
+      
+      const totalDuration = Date.now() - submitStartTime;
+      console.log(`⏱️ Total submission time: ${totalDuration}ms`);
   
-      // Check if both notifications were successful
-      if (resultEmail?.success && resultWhatsApp?.success){
-        console.log({data: resultEmail.data, whatsApp: resultWhatsApp.data})
+      // Extract results from Promise.allSettled
+      const emailSuccess = resultEmail.status === 'fulfilled' && resultEmail.value?.success;
+      const whatsAppSuccess = resultWhatsApp.status === 'fulfilled' && resultWhatsApp.value?.success;
+      
+      // Success if at least ONE notification worked (graceful degradation)
+      if (emailSuccess || whatsAppSuccess) {
+        if (emailSuccess && whatsAppSuccess) {
+          console.log('✓ Both notifications sent successfully');
+        } else if (emailSuccess) {
+          console.warn('⚠️ Email sent, WhatsApp failed');
+        } else {
+          console.warn('⚠️ WhatsApp sent, Email failed');
+        }
+        
         toast.success('Booking request sent successfully!')
         
         // Build URL parameters for thank you page
@@ -126,21 +147,28 @@ function BookingForm() {
         return
       }
   
-      // Handle partial failures with detailed error logging
-      if (!resultEmail?.success) {
-        console.error('Email error:', resultEmail?.error || resultEmail?.errors)
+      // Both notifications failed
+      console.error('✗ Both notifications failed');
+      
+      if (resultEmail.status === 'fulfilled') {
+        console.error('Email error:', resultEmail.value?.error || resultEmail.value?.errors)
+      } else {
+        console.error('Email rejected:', resultEmail.reason)
       }
       
-      if (!resultWhatsApp?.success) {
-        console.error('WhatsApp error:', resultWhatsApp?.error)
+      if (resultWhatsApp.status === 'fulfilled') {
+        console.error('WhatsApp error:', resultWhatsApp.value?.error)
+      } else {
+        console.error('WhatsApp rejected:', resultWhatsApp.reason)
       }
       
       // User-friendly error message
-      toast.error('Something went wrong!')
+      toast.error('Something went wrong! Please try again or call us directly.')
       
     } catch (error) {
       // Catch unexpected errors during submission
-      console.error('Unexpected error:', error)
+      const totalDuration = Date.now() - submitStartTime;
+      console.error(`✗ Unexpected error after ${totalDuration}ms:`, error)
       toast.error('An unexpected error occurred!')
     }
   }

@@ -278,7 +278,8 @@ function formatBookingMessage(booking: BookingInput): string {
 async function sendWhatsAppMessage(
   phoneNumber: string, 
   message: string
-): Promise<{ success: boolean; messageId?: string }> {
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  const startTime = Date.now();
   try {
     const formattedPhone = formatAustralianPhone(phoneNumber);
 
@@ -290,16 +291,29 @@ async function sendWhatsAppMessage(
       {
         chatId: `${formattedPhone}@c.us`,
         message: message
+      },
+      {
+        timeout: 4000 // 4-second timeout for Vercel free tier
       }
     );
+
+    const duration = Date.now() - startTime;
+    console.log(`✓ WhatsApp sent in ${duration}ms`);
 
     return {
       success: true,
       messageId: response.data.idMessage
     };
   } catch (error: any) {
-    console.error('WhatsApp send error:', error.response?.data || error.message);
-    return { success: false };
+    const duration = Date.now() - startTime;
+    
+    if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+      console.error(`✗ WhatsApp timeout after ${duration}ms`);
+      return { success: false, error: 'Timeout' };
+    }
+    
+    console.error(`✗ WhatsApp error after ${duration}ms:`, error.response?.data || error.message);
+    return { success: false, error: error.message };
   }
 }
 
@@ -315,40 +329,53 @@ async function sendWhatsAppMessage(
  * 1. Reads recipients from environment variable (comma-separated)
  * 2. Formats booking data into WhatsApp message
  * 3. Sends to all recipients sequentially
- * 4. Tracks success/failure counts
+ * 4. Tracks success/failure counts with detailed logging
  * 5. Returns appropriate result based on delivery outcomes
  * 
  * Environment variable: WHATSAPP_RECIPIENTS (comma-separated phone numbers)
  */
 export async function sendBookingWhatsApp(booking: BookingInput): Promise<{ success: boolean; data?: any; error?: string }> {
+  const startTime = Date.now();
   
   const recipients = process.env.WHATSAPP_RECIPIENTS?.split(',').map(r => r.trim()) || [];
 
   
   if (recipients.length === 0) {
+    console.error('✗ No WhatsApp recipients configured');
     return { success: false, error: 'No recipients configured' };
   }
   
+  console.log(`📱 Sending WhatsApp to ${recipients.length} recipient(s)...`);
   const message = formatBookingMessage(booking);
   
   let successCount = 0;
   let errorCount = 0;
+  const errors: string[] = [];
 
   for (const recipient of recipients) {
     const result = await sendWhatsAppMessage(recipient.trim(), message);
-    //console.log(`WhatsApp to ${recipient}: ${result.success ? '✓' : '✗'}`);
     
     if (result.success) {
       successCount++;
+      console.log(`  ✓ Sent to ${recipient.substring(0, 4)}****`);
     } else {
       errorCount++;
+      errors.push(`${recipient}: ${result.error || 'Unknown error'}`);
+      console.error(`  ✗ Failed to ${recipient.substring(0, 4)}****: ${result.error}`);
     }
   }
 
+  const totalDuration = Date.now() - startTime;
+  
   if (successCount > 0 && errorCount === 0) {
-    return { success: true, data: { sentTo: successCount } };
+    console.log(`✓ All WhatsApp messages sent (${successCount}/${recipients.length}) in ${totalDuration}ms`);
+    return { success: true, data: { sentTo: successCount, duration: totalDuration } };
+  } else if (successCount > 0) {
+    console.warn(`⚠️ Partial WhatsApp success (${successCount}/${recipients.length}) in ${totalDuration}ms`);
+    return { success: true, data: { sentTo: successCount, failed: errorCount, duration: totalDuration } };
   } else if (errorCount > 0) {
-    return { success: false, error: `Failed to send to ${errorCount} recipient(s)` };
+    console.error(`✗ All WhatsApp messages failed (${errorCount}/${recipients.length}) in ${totalDuration}ms`);
+    return { success: false, error: `Failed to send to ${errorCount} recipient(s): ${errors.join(', ')}` };
   }
   
   return { success: false, error: 'No recipients configured' };
@@ -367,11 +394,13 @@ export async function sendBookingWhatsApp(booking: BookingInput): Promise<{ succ
  * 2. Sends email via Resend with both plain text and React email template
  * 3. Includes reply-to address for customer follow-up
  * 4. Handles errors gracefully with detailed error information
+ * 5. Has 4-second timeout for Vercel free tier compatibility
  * 
  * Uses React email component for rich HTML email and fallback text version.
  */
 export async function sendEmail(data: BookingInput) {
-
+    const startTime = Date.now();
+    
     const result = bookingSchema.safeParse(data)
 
     if(result.success){
@@ -384,7 +413,13 @@ export async function sendEmail(data: BookingInput) {
             const normalizedPickup = normalizeAirportAddress(pickUpAddress);
             const normalizedDropoff = normalizeAirportAddress(dropOffAddress);
             
-            const data = await resend.emails.send({
+            // Create timeout promise for 4 seconds
+            const timeoutPromise = new Promise<never>((_, reject) => {
+                setTimeout(() => reject(new Error('Email timeout after 4s')), 4000);
+            });
+            
+            // Race between email send and timeout
+            const emailPromise = resend.emails.send({
                 from: 'Vic Cabs <booking@viccabs.com.au>',
                 to: ['dee.taxis.au@gmail.com', 'admin@viccabs.com.au'],
                 //cc: 'dee.taxis.au@gmail.com',
@@ -402,10 +437,24 @@ export async function sendEmail(data: BookingInput) {
                   serviceType, 
                   instructions: instruction || '' 
                 })
-            })
-            return { success: true, data }
+            });
+            
+            const emailData = await Promise.race([emailPromise, timeoutPromise]);
+            
+            const duration = Date.now() - startTime;
+            console.log(`✓ Email sent in ${duration}ms`);
+            
+            return { success: true, data: emailData }
         }
-        catch(error){
+        catch(error: any){
+            const duration = Date.now() - startTime;
+            
+            if (error.message?.includes('timeout')) {
+                console.error(`✗ Email timeout after ${duration}ms`);
+                return { success: false, error: 'Timeout' }
+            }
+            
+            console.error(`✗ Email error after ${duration}ms:`, error);
             return { success: false, error }
         }
     }
